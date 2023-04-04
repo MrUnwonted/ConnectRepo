@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" th:remove="tag">
+    <small class="text-light fw-semibold">Use this page to manage countries which will be displayed in the customer registration form. Click Load Country List first.</small>
+            <div class="card-body">
+                <div class="row gy-3">
+                    <div class="col-md-6 gy-3">
+                        <button type="button" id="buttonLoadCountries" class="btn btn-primary">
+                            <span class="tf-icons bx bxs-cloud-download"></span>&nbsp; Load Countries
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <select class="form-control m-2" style="height: 300px" size="3" id="dropDownCountries">
+                    </select>
+                </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" id="labelCountryName">Country Name</label>
+                        <div class="col-sm-4">
+                            <div class="input-group input-group-merge">
+                                <input type="text" class="form-control" id="fieldCountryName"/>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label" id="labelCountryCode">Country Code</label>
+                    <div class="col-sm-4">
+                        <div class="input-group input-group-merge">
+                            <input type="text" class="form-control" id="fieldCountryCode"/>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="row justify-content-end">
+                        <div class="demo-inline-spacing">
+                            <button type="button" value="" id="buttonAddCountry" class="btn btn-primary">
+                                <span class="tf-icons bx bx-plus"></span>&nbsp; New
+                            </button>
+                            <button type="button" id="buttonUpdateCountry" disabled="disabled" class="btn btn-secondary">
+                                <span class="tf-icons bx bx-upload"></span>&nbsp; Update
+                            </button>
+                            <button type="button" id="buttonDeleteCountry" disabled="disabled" class="btn btn-secondary">
+                                <span class="tf-icons bx bx-trash"></span>&nbsp; Delete
+                            </button>
+                        </div>
+                    </div>
+            </div>
+</div>
+</body>
+</html>

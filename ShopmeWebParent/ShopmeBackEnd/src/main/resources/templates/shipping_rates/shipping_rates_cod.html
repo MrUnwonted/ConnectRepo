@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="content" th:remove="tag">
+  <td>
+    <a th:if="${rate.codSupported}" th:href="@{'/shipping_rates/cod/' + ${rate.id} + '/enabled/false'}"><span class="badge bg-label-success me-1" title="Disable COD Support">COD</span></a>
+    <a th:unless="${rate.codSupported}" th:href="@{'/shipping_rates/cod/' + ${rate.id} + '/enabled/true'}"><span class="badge bg-label-danger me-1" title="Enable COD Support">COD</span></a>
+  </td>
+</div>
+</body>
+</html>

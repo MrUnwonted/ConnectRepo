@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head th:replace="fragments.html :: page_head('Cart')">
+</head>
+<body>
+
+<div th:replace="fragments.html :: header"></div>
+
+
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="breadcrumbs-content">
+                    <h1 class="page-title">Cart</h1>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <ul class="breadcrumb-nav">
+                    <li><a th:href="@{/}"><i class="lni lni-home"></i> Home</a></li>
+                    <li>Cart</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="shopping-cart section">
+    <div class="container">
+        <div class="cart-list-head">
+
+            <div class="cart-list-title">
+                <div class="row">
+                    <div class="col-lg-1 col-md-1 col-12">
+
+                    </div>
+                    <div class="col-lg-4 col-md-3 col-12">
+                        <p>Product Name</p>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-12">
+                        <p>Quantity</p>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-12">
+                        <p>Subtotal</p>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-12">
+                        <p>Discount</p>
+                    </div>
+                    <div class="col-lg-1 col-md-2 col-12">
+                        <p>Remove</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <th:block th:each="item, status : ${cartItems}">
+            <div class="cart-single-list" th:id="'row' + ${status.count}">
+                <div class="row align-items-center" th:with="product = ${item.product}">
+                    <div class="col-lg-1 col-md-1 col-12">
+                        <a th:href="@{'/p/' + ${product.alias}}"><img alt="#" th:src="@{${product.mainImagePath}}" target="_blank"></a>
+                    </div>
+                    <div class="col-lg-4 col-md-3 col-12">
+                        <h5 class="product-name"><a th:href="@{'/p/' + ${product.alias}}" target="_blank">
+                            [[${product.shortName}]]</a></h5>
+                        <p class="product-des">
+                            <span><em>Category:</em> [[${product.category.name}]]</span>
+                            <span th:title="${product.name}"><em>Brand:</em> [[${product.brand.name}]]</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-12">
+                        <div class="count-input">
+                            <div th:replace="cart/quantity_control :: content(${item.quantity}, ${item.product.id})"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-12">
+                        <p >
+                            <span th:if="${CURRENCY_SYMBOL_POSITION} == 'Before Price'" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span><span th:id="'subtotal'+${product.id}" class="subtotal">[[${#numbers.formatDecimal((item.subtotal), 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]</span><span th:if="${CURRENCY_SYMBOL_POSITION} == 'After Price'" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
+                        </p>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-12">
+                        <p th:if="${product.discountPercent > 0}">
+
+                            <span th:if="${CURRENCY_SYMBOL_POSITION} == 'Before Price'" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>[[${#numbers.formatDecimal((product.price * item.quantity) - (item.subtotal), 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]<span th:if="${CURRENCY_SYMBOL_POSITION} == 'After Price'" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
+
+                        </p>
+                        <p th:if="${product.discountPercent <= 0}"> - </p>
+
+                    </div>
+                    <div class="col-lg-1 col-md-2 col-12">
+                        <a class="remove-item link-remove" th:rowNumber="${status.count}" th:href="@{'/cart/remove/' + ${product.id}}"><i class="lni lni-close"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            </th:block>
+
+        </div>
+
+        <div id="sectionEmptyCartMessage" th:class="${#lists.isEmpty(cartItems)} ? '' : 'd-none' ">
+
+            <div class="shopping-cart section" >
+                <div class="container">
+                    <p>Cart is Empty !</p>
+                    <div class="button">
+                        <button class="btn">Shop Now</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div th:unless="${#lists.isEmpty(cartItems)}" id="sectionTotal">
+
+        <div class="row">
+            <div class="col-12">
+
+                <div class="total-amount">
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6 col-12">
+                            <div class="left">
+                                <div class="coupon">
+                                    <form action="cart.html#" target="_blank">
+                                        <input name="Coupon" placeholder="Enter Your Coupon">
+                                        <div class="button">
+                                            <button class="btn">Apply Coupon</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="right">
+                                <ul>
+                                    <li>Cart Subtotal<span><span th:if="${CURRENCY_SYMBOL_POSITION} == 'Before Price'" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>[[${#numbers.formatDecimal(estimatedPriceTotal, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]<span th:if="${CURRENCY_SYMBOL_POSITION} == 'After Price'" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span></span>
+                                    </li>
+                                    <li>Shipping<span>Free</span></li>
+                                    <li>You Save<span><span th:if="${CURRENCY_SYMBOL_POSITION} == 'Before Price'" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>[[${#numbers.formatDecimal((estimatedPriceTotal - estimatedTotal), 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]<span th:if="${CURRENCY_SYMBOL_POSITION} == 'After Price'" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span></span></li>
+                                    <li class="last">You Pay<span><span><span th:if="${CURRENCY_SYMBOL_POSITION} == 'Before Price'" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span><span id="estimatedTotal">
+                                            [[${#numbers.formatDecimal(estimatedTotal, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]</span>
+                                        <span th:if="${CURRENCY_SYMBOL_POSITION} == 'After Price'" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span></span></span></li>
+                                </ul>
+                                <div class="button">
+                                    <a class="btn" href="checkout.html">Checkout</a>
+                                    <a class="btn btn-alt" href="product-grids.html">Continue shopping</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div th:replace="fragments/modal :: modal"></div>
+
+<footer th:replace="fragments.html :: footer"></footer>
+
+
+<a class="scroll-top" th:href="@{/cart}">
+    <i class="lni lni-chevron-up"></i>
+</a>
+
+<script type="text/javascript">
+    contextPath = "[[@{/}]]";
+
+    var csrfHeaderName = "[[${_csrf.headerName}]]";
+    var csrfValue = "[[${_csrf.token}]]";
+
+    decimalDigit = [[${DECIMAL_DIGITS}]]
+    decimalPointType = "[[${DECIMAL_POINT_TYPE}]]";
+    thousandsPointType = "[[${THOUSANDS_POINT_TYPE}]]";
+
+</script>
+
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/tiny-slider.js}"></script>
+<script th:src="@{/assets/js/glightbox.min.js}"></script>
+<script th:src="@{/assets/js/main.js}"></script>
+<script th:src="@{/assets/js/jquery/jquery.js}"></script>
+<script th:src="@{/assets/js/jquery/jquery.number.min.js}"></script>
+<script th:src="@{/assets/js/shopping_cart.js}"></script>
+<script th:src="@{/assets/js/common_form.js}"></script>
+
+
+
+
+</body>
+</html>

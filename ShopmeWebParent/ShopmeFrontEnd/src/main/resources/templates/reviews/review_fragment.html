@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="order-list" th:fragment="content">
+
+
+    <div class="container my-5">
+        <div class="text-center mb-5">
+                        <span class="text-secondary text-uppercase">Reviews Posted By Me</span>
+                        <h1 class="text-capitalize font-weight-bold">All <span class="headline">reviews</span></h1>
+
+
+
+                        <div th:replace="fragments/common/search_form :: content(${moduleURL})"></div>
+
+
+            </div>
+
+<!--            <div class="d-flex justify-content-between align-items-center">-->
+<!--                <div th:replace="fragments/common/search_form :: content(${moduleURL})"></div>-->
+
+<!--                <div class="table-responsive text-nowrap">-->
+<!--                    <table class="table table-hover">-->
+<!--                        <thead>-->
+<!--                        <tr>-->
+<!--                            <th th:replace="fragments/common/column_link :: column_link('id', 'Id', 'none')"></th>-->
+<!--                            <th th:replace="fragments/common/column_link :: column_link('product', 'Product', 'none')"></th>-->
+<!--                            <th th:replace="fragments/common/column_link :: column_link('rating', 'Rating', 'none')"></th>-->
+<!--                            <th th:replace="fragments/common/column_link :: column_link('reviewTime', 'Review Time', 'none')"></th>-->
+<!--                        </tr>-->
+<!--                        </thead>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+
+        </div>
+
+        <th:block th:each="review : ${listReviews}">
+            <div class="my-5 py-4 px-5 bg-light d-sm-flex align-items-center justify-content-between">
+                <div class="text-center">
+                    <span>Id: [[${review.id}]]</span>
+                    <h6 class="my-2 font-weight-bold">
+                        [[${review.headline}]]
+                    </h6>
+                    <small class="d-block my-3 text-secondary">
+                        [[${review.reviewTime}]]
+                    </small>
+                </div>
+                <div class="text-center text-uppercase text-secondary">
+                    <small class="d-block">
+                        <a target="_blank" th:href="@{'/p/' + ${review.product.alias}}">
+                            [[${review.product.shortName}]]</a>
+                    </small>
+                </div>
+                <div class="text-center text-uppercase text-secondary">
+                    <small class="d-block">
+                        [[${review.headline}]]
+                    </small>
+                    <small class="d-block">
+                        <a class="text-blue"
+                           href=""
+                           title="Return this order">[[${review.rating}]] <i class="far fa-star"></i></a>
+                    </small>
+
+                </div>
+                <div class="text-center">
+                    <a class="btn text-white px-5 py-3 main-btn link-detail-review"
+                       th:href="@{'/reviews/detail/' + ${review.id}}"
+                       title="View details of this Review">View</a>
+                </div>
+            </div>
+        </th:block>
+
+    </div>
+
+</div>
+</body>
+</html>

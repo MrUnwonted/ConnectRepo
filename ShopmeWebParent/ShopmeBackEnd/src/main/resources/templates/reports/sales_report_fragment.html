@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content(reportType)" th:remove="tag">
+
+    <div class="col-12 mb-3" th:with="buttonClass = 'button-sales-by' + ${reportType}">
+        <small class="text-light fw-semibold">Filter</small>
+        <div class="demo-inline-spacing">
+            <button period="last_7_days" class="btn btn-outline-primary " th:classappend="${buttonClass}" type="button">Last 7 Days</button>
+            <button period="last_28_days" class="btn btn-outline-primary " th:classappend="${buttonClass}" type="button">Last 28 Days</button>
+            <button period="last_6_months" class="btn btn-outline-primary " th:classappend="${buttonClass}" type="button">Last 6 Months</button>
+            <button period="last_year" class="btn btn-outline-primary " th:classappend="${buttonClass}" type="button">Last Year</button>
+            <button class="btn btn-outline-primary " th:classappend="${buttonClass}" type="button">Custom Date</button>
+        </div>
+    </div>
+
+    <div th:id="'divCustomDateRange' + ${reportType}" class="d-none">
+        From date: <input type="date" th:id="'startDate' + ${reportType}"> &nbsp;
+        to date: <input type="date" th:id="'endDate' + ${reportType}"> &nbsp;
+        <button type="button" class="btn btn-secondary" th:id="'buttonViewReportByDateRange' + ${reportType}">View</button>
+    </div>
+
+    <div class="col-12 mt-3" th:id="'chart_sales_by' + ${reportType}">
+
+    </div>
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="row mb-2 justify-content-center">
+            <div class="col-sm-6 col-lg-2 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <small class="text-muted">Total</small>
+                        <span class="fw-semibold d-block mb-1">Gross Sale</span>
+                        <h5 class="card-title mb-2" th:id="'textTotalGrossSales'  + ${reportType}"></h5>
+<!--                        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-2 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <small class="text-muted">Total</small>
+                        <span class="fw-semibold d-block mb-1">Net Sale</span>
+                        <h5 class="card-title mb-2" th:id="'textTotalNetSales' + ${reportType}"></h5>
+<!--                        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>-->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-lg-2 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <small class="text-muted">Average</small>
+                        <span class="fw-semibold d-block mb-1">Gross Sales</span>
+                        <h5 class="card-title mb-2" th:id="'textAvgGrossSales' + ${reportType}"></h5>
+<!--                        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-2 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <small class="text-muted">Average</small>
+                        <span class="fw-semibold d-block mb-1">Net Sales</span>
+                        <h5 class="card-title mb-2" th:id="'textAvgNetSales' + ${reportType}"></h5>
+<!--                        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-2 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <small class="text-muted">Total</small>
+                        <span class="fw-semibold d-block mb-1"><span th:id="'labelTotalItems' + ${reportType}"></span></span>
+                        <h5 class="card-title mb-2" th:id="'textTotalItems'  + ${reportType}"></h5>
+<!--                        <small class="text-success fw-semibold"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

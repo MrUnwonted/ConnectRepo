@@ -1,0 +1,196 @@
+<html class="no-js" lang="zxx"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head th:replace="fragments.html :: page_head('Profile')">
+</head>
+<body>
+
+<div th:replace="fragments.html :: header"></div>
+
+
+<div class="breadcrumbs">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-6 col-12">
+                <div class="breadcrumbs-content">
+                    <h1 class="page-title">Contact Us</h1>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+                <ul class="breadcrumb-nav">
+                    <li><a th:href="@{/}"><i class="lni lni-home"></i> Home</a></li>
+                    <li>Contact</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section class="contact-us section" id="contact-us">
+    <div class="container">
+        <div th:if="${message != null}" class="alert alert-success alert-dismissible" role="alert">
+            [[${message}]]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <div class="contact-head">
+            <div class="row">
+
+                <div class="col-12">
+                    <div class="section-title">
+                        <h2>Account Details</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-info">
+                <div class="row">
+                    <div class="col-lg-4 col-md-12 col-12">
+                        <div class="single-info-head">
+
+                            <div class="single-info">
+                                <i class="lni lni-user"></i>
+                                <h3>Your Email</h3>
+                                <ul>
+                                    <li>
+                                     <span>[[${customer.email}]]</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="single-info">
+                             <i class="lni lni-key"></i>
+                             <h3>Authentication Type</h3>
+                             <ul>
+                              <li>[[${customer.authenticationType}]]</li>
+                             </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-12 col-12" style="margin-top: 30px;">
+                        <div class="account-login">
+                            <div class="register-form">
+                             <form class="row" method="post" th:action="@{/update_account_details}" th:object="${customer}">
+                              <input type="hidden" th:field="*{id}">
+                              <input type="hidden" th:field="*{email}">
+                              <input type="hidden" th:field="*{authenticationType}">
+                              <div class="col-sm-6">
+                               <div class="form-group">
+                                <label for="reg-fn">First Name</label>
+                                <input class="form-control" th:field="*{firstName}" minlength="2" maxlength="45" id="reg-fn" required type="text">
+                               </div>
+                              </div>
+                              <div class="col-sm-6">
+                               <div class="form-group">
+                                <label for="reg-ln">Last Name</label>
+                                <input class="form-control" th:field="*{lastName}" minlength="2" maxlength="45" id="reg-ln" required type="text">
+                               </div>
+                              </div>
+                              <div class="col-sm-6">
+                               <div class="form-group">
+                                <label for="reg-phone">Phone Number</label>
+                                <input class="form-control" th:field="*{phoneNumber}" minlength="8" maxlength="15" id="reg-phone" required type="text">
+                               </div>
+                              </div>
+                                 <div class="col-sm-6">
+                                     <div class="form-group">
+
+                                     </div>
+                                 </div>
+                                 <th:block th:if="${customer.authenticationType.name() == 'DATABASE'}">
+                              <div class="col-sm-6">
+                               <div class="form-group">
+                                <label for="reg-pass">Password</label>
+                                <input class="form-control" id="reg-pass" oninput="checkPasswordMatch(document.getElementById('reg-pass-confirm'))"
+                                       th:field="*{password}" minlength="8" maxlength="15" type="password">
+                               </div>
+                              </div>
+                              <div class="col-sm-6">
+                               <div class="form-group">
+                                <label for="reg-pass-confirm">Confirm Password</label>
+                                <input class="form-control" oninput="checkPasswordMatch(this)"
+                                       id="reg-pass-confirm" minlength="8" maxlength="15" type="password">
+                               </div>
+                              </div>
+                                 </th:block>
+                              <div class="col-sm-6">
+                               <div class="form-group">
+                                <label for="reg-add1">Address 1</label>
+                                <input class="form-control" id="reg-add1" th:field="*{addressLine1}" minlength="3" maxlength="64" required type="text">
+                               </div>
+                              </div>
+                              <div class="col-sm-6">
+                               <div class="form-group">
+                                <label for="reg-add2">Address 2</label>
+                                <input class="form-control" id="reg-add2" th:field="*{addressLine2}" minlength="3" maxlength="64" type="text">
+                               </div>
+                              </div>
+                              <div class="col-sm-6">
+                               <div class="form-group">
+                                <label for="reg-city">City</label>
+                                <input class="form-control" id="reg-city" th:field="*{city}" minlength="2" maxlength="45" required type="text">
+                               </div>
+                              </div>
+                              <div class="col-sm-6">
+                               <div class="form-group">
+                                <label for="reg-country">Country</label>
+                                <select class="form-control" id="reg-country" th:field="*{country}" required >
+                                 <th:block th:each="country : ${listCountries}">
+                                  <option th:value="${country.id}">[[${country.name}]]</option>
+                                 </th:block>
+                                </select>
+                               </div>
+                              </div>
+                              <div class="col-sm-6">
+                               <div class="form-group">
+                                <label for="reg-state">State/Province</label>
+                                <input class="form-control" id="reg-state" th:field="*{state}" minlength="3" maxlength="45" required list="listStates">
+                                <datalist id="listStates"></datalist>
+                               </div>
+                              </div>
+                              <div class="col-sm-6">
+                               <div class="form-group">
+                                <label for="reg-code">Postal Code</label>
+                                <input class="form-control" id="reg-code" th:field="*{postalCode}" minlength="2" maxlength="10" required type="text">
+                               </div>
+                              </div>
+
+                              <div class="button">
+                               <button class="btn" type="submit">Update</button>
+                              </div>
+                             </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<footer th:replace="fragments.html :: footer"></footer>
+
+
+<a class="scroll-top" href="contact.html#">
+    <i class="lni lni-chevron-up"></i>
+</a>
+
+<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script th:src="@{assets/js/bootstrap.min.js}"></script>
+<script th:src="@{assets/js/tiny-slider.js}"></script>
+<script th:src="@{assets/js/glightbox.min.js}"></script>
+<script th:src="@{assets/js/main.js}"></script>
+<script th:src="@{/assets/js/jquery/jquery.js}"></script>
+<script th:src="@{/assets/js/common_form.js}"></script>
+<script th:src="@{/assets/js/common_customer-form.js}"></script>
+
+
+<script type="text/javascript">
+    contextPath = "[[@{/}]]";
+
+</script>
+</body>
+</html>

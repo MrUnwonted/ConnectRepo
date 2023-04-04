@@ -1,0 +1,25 @@
+User Id,E-mail,First Name,Last Name,Roles,Enabled
+1,nam@codejava.net,Midlaj,Muhammed,[Editor],true
+3,aecllc.bnk@gmail.com,Bruce,Kitchell,[Salesperson],false
+4,muhammad.evran13@gmail.com,Muhammad,Midlaj,[Editor],true
+5,kent.hervey8@gmail.com,Kent,Hervey,"[Editor, Assistant]",true
+7,nathihsa@gmail.com,Nathi,Sangweni,[Editor],false
+8,ammanollashirisha2020@gmail.com,Ammanolla,Shirisha,[Editor],true
+9,bfeeny238@hotmail.com,Bill,Midlaj,"[Admin, Salesperson]",false
+10,redsantosph@gmail.com,Frederick,delos Santos,[Salesperson],true
+11,ro_anamaria@mail.ru,Ana,Maria,"[Salesperson, Editor]",true
+12,maytassatya@hotmail.com,Satya,Narayana,[Salesperson],false
+13,matthewefoli@gmail.com,Matthew,Efoli,[Salesperson],true
+14,davekumara2@gmail.com,Dave,Kumar,"[Shipper, Assistant]",true
+15,jackkbruce@yahoo.com,Jack,Bruce,"[Editor, Shipper]",true
+16,zirri.mohamed@gmail.com,Mohamed,Zirri,[Shipper],true
+17,mk.majumdar009@hotmail.com,Mithun,Kumar Majumdar,[Shipper],false
+18,aliraza.arain.28@gmail.com,Alim,Muhammed,"[Editor, Shipper]",false
+19,isaachenry2877@gmail.com,Isaac,HenryCavil,"[Salesperson, Assistant]",true
+20,s.stasovska82@hotmail.com,Svetlana,Stasovska,"[Salesperson, Editor, Assistant]",true
+21,mikegates2012@gmail.com,Mike,Elon,[Assistant],true
+22,pedroquintero67@gmail.com,Pedro,Quintero,[Assistant],false
+23,amina.elshal2@yahoo.com,Amina,Elshal,[Assistant],false
+25,user@gmail.com,Muhammed ,Midlaj,[Assistant],true
+27,mumidlaj@gmail.com,Muhammed ,Midlaj,"[Admin, Salesperson]",true
+28,test@gmail.com,test,user,[Assistant],false

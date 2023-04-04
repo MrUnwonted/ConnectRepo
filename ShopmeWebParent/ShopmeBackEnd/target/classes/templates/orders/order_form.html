@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        class="light-style layout-menu-fixed"
+        dir="ltr"
+        data-theme="theme-default"
+        data-assets-path="../assets/"
+        data-template="vertical-menu-template-free"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head>
+  <head th:replace="fragments  :: page_head(${pageTitle}, 'tag' )"/>
+
+</head>
+
+
+<body>
+
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+
+
+    <aside th:replace="fragments :: page_sidebar">
+    </aside>
+
+    <div class="layout-page">
+
+      <!-- Navbar -->
+      <nav th:replace="fragments :: page_navbar">
+      </nav>
+
+      <div class="content-wrapper">
+
+        <!-- Content -->
+
+        <div class="container-xxl flex-grow-1 container-p-y">
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Product/</span> [[${pageTitle}]]</h4>
+          <div class="row">
+            <div class="col-xl">
+              <div class="card mb-4">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                  <h5 class="mb-0">Complete the From</h5>
+                  <small class="text-muted float-end">Product Details</small>
+                </div>
+                <div class="card-body">
+
+                  <form th:object="${order}" th:action="@{/order/save}" method="post" onsubmit="return processFormBeforeSubmit();">
+
+                    <input type="hidden" th:field="*{id}">
+
+                    <div class="col-xl-12">
+                      <h6 class="text-muted">Order Details</h6>
+                      <div class="nav-align-top mb-4">
+                        <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
+                          <li class="nav-item">
+                            <button
+                                    type="button"
+                                    class="nav-link active"
+                                    role="tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#navs-pills-justified-overview"
+                                    aria-controls="navs-pills-justified-overview"
+                                    aria-selected="true"
+                            >Overview</button>
+                          </li>
+                          <li class="nav-item">
+                            <button
+                                    type="button"
+                                    class="nav-link"
+                                    role="tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#navs-pills-justified-products"
+                                    aria-controls="navs-pills-justified-products"
+                                    aria-selected="false"
+                            >Products
+                            </button>
+                          </li>
+                          <li class="nav-item">
+                            <button
+                                    type="button"
+                                    class="nav-link"
+                                    role="tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#navs-pills-justified-shipping"
+                                    aria-controls="navs-pills-justified-shipping"
+                                    aria-selected="false"
+                            >Shipping
+                            </button>
+                          </li>
+                          <li class="nav-item">
+                            <button
+                                    type="button"
+                                    class="nav-link"
+                                    role="tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#navs-pills-justified-track"
+                                    aria-controls="navs-pills-justified-track"
+                                    aria-selected="false"
+                            >Track
+                            </button>
+                          </li>
+                        </ul>
+                        <div class="tab-content">
+                          <div class="tab-pane fade show active" id="navs-pills-justified-overview" role="tabpanel">
+                            <div th:replace="order/order_overview :: content"></div>
+                          </div>
+                          <div class="tab-pane fade" id="navs-pills-justified-products" role="tabpanel">
+                            <div th:replace="order/order_products :: content"></div>
+                          </div>
+                          <div class="tab-pane fade" id="navs-pills-justified-shipping" role="tabpanel">
+                            <div th:replace="order/order_shipping :: content"></div>
+                          </div>
+                          <div class="tab-pane fade" id="navs-pills-justified-track" role="tabpanel">
+                            <div th:replace="order/order_track :: content"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-10">
+                          <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+
+                  <div th:replace="modal :: modal"></div>
+                  <div th:replace="order/add_product_modal :: content"></div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Footer -->
+      <footer th:replace="fragments :: page_footer">
+      </footer>
+
+
+      <div class="content-backdrop fade"></div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="layout-overlay layout-menu-toggle"></div>
+</div>
+
+<script type="text/javascript" th:src="@{/js/common_form.js}"></script>
+<script th:src="@{/js/common_form_country.js}"></script>
+<script th:src="@{/js/order_form_overview_products.js}"></script>
+<script th:src="@{/js/order_form_remove_product.js}"></script>
+
+
+
+
+<script type="text/javascript">
+  contextPath = "[[@{/}]]";
+  var csrfHeaderName = "[[${_csrf.headerName}]]";
+  var csrfValue = "[[${_csrf.token}]]";
+
+</script>
+
+<script th:src="@{/js/sweetalert.min.js}"></script>
+<script th:src="@{/js/toast.js}"></script>
+
+
+<script th:src="@{/assets/vendor/libs/jquery/jquery.js}"></script>
+<script th:src="@{/assets/vendor/libs/popper/popper.js}"></script>
+<script th:src="@{/assets/vendor/js/bootstrap.js}"></script>
+<script th:src="@{/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+
+<script th:src="@{/assets/vendor/js/menu.js}"></script>
+<script th:src="@{/assets/vendor/libs/apex-charts/apexcharts.js}"></script>
+
+<script th:src="@{/assets/js/main.js}"></script>
+
+<script th:src="@{/assets/js/dashboards-analytics.js}"></script>
+<script th:src="@{/js/jquery.number.min.js}"></script>
+<script th:src="@{/js/order_form_add_product.js}"></script>
+<script th:src="@{/js/order_form_track.js}"></script>
+
+
+
+
+
+
+</body>
+</html>

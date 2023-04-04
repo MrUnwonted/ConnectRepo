@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+    <head>
+        <!-- Title -->
+        <title>My Account | Electro - Responsive Website Template</title>
+
+        <!-- Required Meta Tags Always Come First -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" th:href="@{/favicon.png}">
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
+
+        <!-- CSS Implementing Plugins -->
+        <link rel="stylesheet" th:href="@{/assets/vendor/font-awesome/css/fontawesome-all.min.css}">
+        <link rel="stylesheet" th:href="@{/assets/css/font-electro.css}">
+
+        <link rel="stylesheet" th:href="@{/assets/vendor/animate.css/animate.min.css}">
+        <link rel="stylesheet" th:href="@{/assets/vendor/hs-megamenu/src/hs.megamenu.css}">
+        <link rel="stylesheet" th:href="@{/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css}">
+        <link rel="stylesheet" th:href="@{/assets/vendor/fancybox/jquery.fancybox.css}">
+        <link rel="stylesheet" th:href="@{/assets/vendor/slick-carousel/slick/slick.css}">
+        <link rel="stylesheet" th:href="@{/assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css}">
+
+        <!-- CSS Electro Template -->
+        <link rel="stylesheet" th:href="@{/assets/css/theme.css}">
+    </head>
+
+    <body>
+
+        <div th:replace="fragments/common/header :: content"></div>
+
+        <!-- ========== MAIN CONTENT ========== -->
+        <main id="content" role="main">
+            <!-- breadcrumb -->
+            <div class="bg-gray-13 bg-md-transparent">
+                <div class="container">
+                    <!-- breadcrumb -->
+                    <div class="my-md-3">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
+                                <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a th:href="@{/}">Home</a></li>
+                                <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">My Account</li>
+                            </ol>
+                        </nav>
+                    </div>
+                    <!-- End breadcrumb -->
+                </div>
+            </div>
+            <!-- End breadcrumb -->
+
+            <div class="container">
+                <div class="mb-4">
+                    <h1 class="text-center">My Account</h1>
+                </div>
+                <div class="my-4 my-xl-8">
+                    <div class="row">
+                        <div class="col-md-5 ml-xl-auto mr-md-auto mr-xl-0 mb-8 mb-md-0">
+                            <!-- Title -->
+                            <div class="border-bottom border-color-1 mb-6">
+                                <h3 class="d-inline-block section-title mb-0 pb-2 font-size-26">Login</h3>
+                            </div>
+                            <p class="text-gray-90 mb-4">Welcome back! Sign in to your account.</p>
+                            <!-- End Title -->
+                            <form class="js-validate" novalidate="novalidate">
+                                <!-- Form Group -->
+                                <div class="js-form-message form-group">
+                                    <label class="form-label" for="signinSrEmailExample3">Username or Email address
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="email" class="form-control" name="email" id="signinSrEmailExample3" placeholder="Username or Email address" aria-label="Username or Email address" required
+                                    data-msg="Please enter a valid email address."
+                                    data-error-class="u-has-error"
+                                    data-success-class="u-has-success">
+                                </div>
+                                <!-- End Form Group -->
+
+                                <!-- Form Group -->
+                                <div class="js-form-message form-group">
+                                    <label class="form-label" for="signinSrPasswordExample2">Password <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control" name="password" id="signinSrPasswordExample2" placeholder="Password" aria-label="Password" required
+                                    data-msg="Your password is invalid. Please try again."
+                                    data-error-class="u-has-error"
+                                    data-success-class="u-has-success">
+                                </div>
+                                <!-- End Form Group -->
+
+                                <!-- Checkbox -->
+                                <div class="js-form-message mb-3">
+                                    <div class="custom-control custom-checkbox d-flex align-items-center">
+                                        <input type="checkbox" class="custom-control-input" id="rememberCheckbox" name="rememberCheckbox" required
+                                        data-error-class="u-has-error"
+                                        data-success-class="u-has-success">
+                                        <label class="custom-control-label form-label" for="rememberCheckbox">
+                                            Remember me
+                                        </label>
+                                    </div>
+                                </div>
+                                <!-- End Checkbox -->
+
+                                <!-- Button -->
+                                <div class="mb-1">
+                                    <div class="mb-3">
+                                        <button type="submit" class="btn btn-primary-dark-w px-5">Login</button>
+                                    </div>
+                                    <div class="mb-2">
+                                        <a class="text-blue" href="my-account.html#">Lost your password?</a>
+                                    </div>
+                                </div>
+                                <!-- End Button -->
+                            </form>
+                        </div>
+                        <div class="col-md-1 d-none d-md-block">
+                            <div class="flex-content-center h-100">
+                                <div class="width-1 bg-1 h-100"></div>
+                                <div class="width-50 height-50 border border-color-1 rounded-circle flex-content-center font-italic bg-white position-absolute">or</div>
+                            </div>
+                        </div>
+                        <div class="col-md-5 ml-md-auto ml-xl-0 mr-xl-auto">
+                            <!-- Title -->
+                            <div class="border-bottom border-color-1 mb-6">
+                                <h3 class="d-inline-block section-title mb-0 pb-2 font-size-26">Register</h3>
+                            </div>
+                            <p class="text-gray-90 mb-4">Create new account today to reap the benefits of a personalized shopping experience.</p>
+                            <!-- End Title -->
+                            <!-- Form Group -->
+                            <form class="js-validate" novalidate="novalidate">
+                                <div class="js-form-message form-group mb-5">
+                                    <label class="form-label" for="RegisterSrEmailExample3">Email address
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="email" class="form-control" name="email" id="RegisterSrEmailExample3" placeholder="Email address" aria-label="Email address" required
+                                    data-msg="Please enter a valid email address."
+                                    data-error-class="u-has-error"
+                                    data-success-class="u-has-success">
+                                </div>
+                                <!-- End Form Group -->
+                                <p class="text-gray-90 mb-4">Your personal data will be used to support your experience throughout this website, to manage your account, and for other purposes described in our <a href="my-account.html#" class="text-blue">privacy policy.</a></p>
+                                <!-- Button -->
+                                <div class="mb-6">
+                                    <div class="mb-3">
+                                        <button type="submit" class="btn btn-primary-dark-w px-5">Register</button>
+                                    </div>
+                                </div>
+                                <!-- End Button -->
+                            </form>
+                            <h3 class="font-size-18 mb-3">Sign up today and you will be able to :</h3>
+                            <ul class="list-group list-group-borderless">
+                                <li class="list-group-item px-0"><i class="fas fa-check mr-2 text-green font-size-16"></i> Speed your way through checkout</li>
+                                <li class="list-group-item px-0"><i class="fas fa-check mr-2 text-green font-size-16"></i> Track your orders easily</li>
+                                <li class="list-group-item px-0"><i class="fas fa-check mr-2 text-green font-size-16"></i> Keep a record of all your purchases</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- ========== END MAIN CONTENT ========== -->
+
+        <div th:replace="fragments/common/footer :: content"></div>
+
+
+        <div th:replace="fragments/common/secondary_contents :: content"></div>
+
+        <div th:replace="fragments/login_register/sidebar_nav :: content"></div>
+
+        <!-- Go to Top -->
+        <a class="js-go-to u-go-to" href="my-account.html#"
+            data-position='{"bottom": 15, "right": 15 }'
+            data-type="fixed"
+            data-offset-top="400"
+            data-compensation="#header"
+            data-show-effect="slideInUp"
+            data-hide-effect="slideOutDown">
+            <span class="fas fa-arrow-up u-go-to__inner"></span>
+        </a>
+        <!-- End Go to Top -->
+
+        <!-- JS Global Compulsory -->
+        <script th:src="@{/assets/vendor/jquery/dist/jquery.min.js}"></script>
+        <script th:src="@{/assets/vendor/jquery-migrate/dist/jquery-migrate.min.js}"></script>
+        <script th:src="@{/assets/vendor/popper.js/dist/umd/popper.min.js}"></script>
+        <script th:src="@{/assets/vendor/bootstrap/bootstrap.min.js}"></script>
+
+        <!-- JS Implementing Plugins -->
+        <script th:src="@{/assets/vendor/jquery.countdown.min.js}"></script>
+        <script th:src="@{/assets/vendor/hs-megamenu/src/hs.megamenu.js}"></script>
+        <script th:src="@{/assets/vendor/svg-injector/dist/svg-injector.min.js}"></script>
+        <script th:src="@{/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js}"></script>
+        <script th:src="@{/assets/vendor/jquery-validation/dist/jquery.validate.min.js}"></script>
+        <script th:src="@{/assets/vendor/fancybox/jquery.fancybox.min.js}"></script>
+        <script th:src="@{/assets/vendor/typed.js/lib/typed.min.js}"></script>
+        <script th:src="@{/assets/vendor/slick-carousel/slick/slick.js}"></script>
+        <script th:src="@{/assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js}"></script>
+
+        <!-- JS Electro -->
+        <script th:src="@{/assets/js/hs.core.js}"></script>
+        <script th:src="@{/assets/js/components/hs.countdown.js}"></script>
+        <script th:src="@{/assets/js/components/hs.header.js}"></script>
+        <script th:src="@{/assets/js/components/hs.hamburgers.js}"></script>
+        <script th:src="@{/assets/js/components/hs.unfold.js}"></script>
+        <script th:src="@{/assets/js/components/hs.focus-state.js}"></script>
+        <script th:src="@{/assets/js/components/hs.malihu-scrollbar.js}"></script>
+        <script th:src="@{/assets/js/components/hs.validation.js}"></script>
+        <script th:src="@{/assets/js/components/hs.fancybox.js}"></script>
+        <script th:src="@{/assets/js/components/hs.onscroll-animation.js}"></script>
+        <script th:src="@{/assets/js/components/hs.slick-carousel.js}"></script>
+        <script th:src="@{/assets/js/components/hs.show-animation.js}"></script>
+        <script th:src="@{/assets/js/components/hs.svg-injector.js}"></script>
+        <script th:src="@{/assets/js/components/hs.go-to.js}"></script>
+        <script th:src="@{/assets/js/components/hs.selectpicker.js}"></script>
+
+
+        <!-- JS Plugins Init. -->
+        <script>
+            $(window).on('load', function () {
+                // initialization of HSMegaMenu component
+                $('.js-mega-menu').HSMegaMenu({
+                    event: 'hover',
+                    direction: 'horizontal',
+                    pageContainer: $('.container'),
+                    breakpoint: 767.98,
+                    hideTimeOut: 0
+                });
+            });
+
+            $(document).on('ready', function () {
+                // initialization of header
+                $.HSCore.components.HSHeader.init($('#header'));
+
+                // initialization of animation
+                $.HSCore.components.HSOnScrollAnimation.init('[data-animation]');
+
+                // initialization of unfold component
+                $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+                    afterOpen: function () {
+                        $(this).find('input[type="search"]').focus();
+                    }
+                });
+
+                // initialization of HSScrollNav component
+                $.HSCore.components.HSScrollNav.init($('.js-scroll-nav'), {
+                  duration: 700
+                });
+
+                // initialization of quantity counter
+                $.HSCore.components.HSQantityCounter.init('.js-quantity');
+
+                // initialization of popups
+                $.HSCore.components.HSFancyBox.init('.js-fancybox');
+
+                // initialization of countdowns
+                var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
+                    yearsElSelector: '.js-cd-years',
+                    monthsElSelector: '.js-cd-months',
+                    daysElSelector: '.js-cd-days',
+                    hoursElSelector: '.js-cd-hours',
+                    minutesElSelector: '.js-cd-minutes',
+                    secondsElSelector: '.js-cd-seconds'
+                });
+
+                // initialization of malihu scrollbar
+                $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
+
+                // initialization of forms
+                $.HSCore.components.HSFocusState.init();
+
+                // initialization of form validation
+                $.HSCore.components.HSValidation.init('.js-validate', {
+                    rules: {
+                        confirmPassword: {
+                            equalTo: '#signupPassword'
+                        }
+                    }
+                });
+
+                // initialization of forms
+                $.HSCore.components.HSRangeSlider.init('.js-range-slider');
+
+                // initialization of show animations
+                $.HSCore.components.HSShowAnimation.init('.js-animation-link');
+
+                // initialization of fancybox
+                $.HSCore.components.HSFancyBox.init('.js-fancybox');
+
+                // initialization of slick carousel
+                $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+
+                // initialization of go to
+                $.HSCore.components.HSGoTo.init('.js-go-to');
+
+                // initialization of hamburgers
+                $.HSCore.components.HSHamburgers.init('#hamburgerTrigger');
+
+                // initialization of unfold component
+                $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+                    beforeClose: function () {
+                        $('#hamburgerTrigger').removeClass('is-active');
+                    },
+                    afterClose: function() {
+                        $('#headerSidebarList .collapse.show').collapse('hide');
+                    }
+                });
+
+                $('#headerSidebarList [data-toggle="collapse"]').on('click', function (e) {
+                    e.preventDefault();
+
+                    var target = $(this).data('target');
+
+                    if($(this).attr('aria-expanded') === "true") {
+                        $(target).collapse('hide');
+                    } else {
+                        $(target).collapse('show');
+                    }
+                });
+
+                // initialization of unfold component
+                $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
+
+                // initialization of select picker
+                $.HSCore.components.HSSelectPicker.init('.js-select');
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,126 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel4">Review Details</h5>
+    <button
+            aria-label="Close"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            type="button"
+    ></button>
+</div>
+
+<div class="modal-body">
+    <div class="col-xl-12">
+        <h6 class="text-muted">Review Details</h6>
+        <div class="nav-align-top mb-4">
+            <div class="tab-content">
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label"
+                           for="email">Review Id</label>
+                    <div class="col-sm-10">
+                        <div class="input-group input-group-merge">
+                            <span class="input-group-text"><i class="bx bxs-chevron-right"></i></span>
+                            <input aria-describedby="id"
+                                   class="form-control"
+                                   readonly
+                                   th:value="${review.id}"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label"
+                           for="email">Product</label>
+                    <div class="col-sm-10">
+                        <div class="input-group input-group-merge">
+                            <span class="input-group-text"><i class="bx bxs-chevron-right"></i></span>
+                            <input aria-describedby="id"
+                                   class="form-control"
+                                   readonly
+                                   th:value="${review.product.name}"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label"
+                           for="email">Review Id</label>
+                    <div class="col-sm-10">
+                        <div class="input-group input-group-merge">
+                            <span class="input-group-text"><i class="bx bxs-chevron-right"></i></span>
+                            <input aria-describedby="id"
+                                   class="form-control"
+                                   readonly
+                                   th:value="${review.customer.fullName}"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label"
+                           for="email">Headline</label>
+                    <div class="col-sm-10">
+                        <div class="input-group input-group-merge">
+                            <span class="input-group-text"><i class="bx bxs-chevron-right"></i></span>
+                            <input aria-describedby="email"
+                                   class="form-control"
+                                   readonly
+                                   th:value="${review.headline}"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label"
+                           for="email">Comment</label>
+                    <div class="col-sm-10">
+                        <div class="input-group input-group-merge">
+                            <span class="input-group-text"><i class="bx bxs-chevron-right"></i></span>
+                            <textarea aria-describedby="email"
+                                   class="form-control"
+                                   readonly
+                                      rows="3"
+                            >[[${review.comment}]]</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label"
+                           for="email">Votes</label>
+                    <div class="col-sm-10">
+                        <div class="input-group input-group-merge">
+                            <span class="input-group-text"><i class="bx bxs-chevron-right"></i></span>
+                            <input class="form-control"
+                                   readonly
+                                   th:value="${review.votes}"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label"
+                           for="email">Review Time</label>
+                    <div class="col-sm-10">
+                        <div class="input-group input-group-merge">
+                            <span class="text-muted" th:text="${#dates.format(review.reviewTime, 'yyy-MM-dd HH:mm:ss')}"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-outline-secondary" data-bs-dismiss="modal" type="button">
+        Close
+    </button>
+    <a class="btn btn-primary" th:href="@{'/reviews/edit/' + ${review.id}}" type="button">Edit</a>
+</div>

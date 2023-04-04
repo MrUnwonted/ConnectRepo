@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head th:replace="fragments/common/head :: content('none')"></head>
+
+
+<body>
+
+<div th:replace="fragments/common/header :: content"></div>
+
+<!-- ========== MAIN CONTENT ========== -->
+<main id="content" role="main">
+    <!-- breadcrumb -->
+    <div class="bg-gray-13 bg-md-transparent">
+        <div class="container">
+            <!-- breadcrumb -->
+            <div class="my-md-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a th:href="@{/}">Home</a></li>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a
+                                th:href="@{'/p/' + ${review.product.alias}}">[[${review.product.shortName}]]</a></li>
+                        <li aria-current="page" class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active">Review
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End breadcrumb -->
+        </div>
+    </div>
+    <!-- End breadcrumb -->
+
+    <div class="container">
+        <div class="my-4 my-xl-8">
+            <div class="row">
+                <div class="col-md-5 ml-xl-auto mr-md-auto mr-xl-0 mb-8 mb-md-0">
+                    <div><h4>Review Added</h4></div>
+                    <form class="js-validate" novalidate="novalidate"
+                          style="max-width: 600px; margin: 0 auto; border: none;">
+                        <div class="p-3">
+                            <p>
+                            <div class="js-form-message form-group">
+                                <input class="product-rating-star" data-size="md" data-step="1" dir="ltr" required readonly
+                                       th:field="*{review.rating}" type="text"/>
+                            </div>
+                            </p>
+                            <p>
+                            <div class="js-form-message form-group">
+                                <input class="form-control" maxlength="128" minlength="10"
+                                       placeholder="Headline or Summary" required readonly
+                                       th:field="*{review.headline}"
+                                       type="text"/>
+                        </div>
+                            </p>
+                            <p>
+                            <div class="js-form-message form-group">
+                            <textarea class="form-control" cols="10"
+                                      placeholder="Comment Details"
+                                      required
+                                      readonly
+                                      rows="3"
+                                      type="text">
+                                [[${review.comment}]]
+                            </textarea>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="col-md-1 d-none d-md-block">
+                    <div class="flex-content-center h-100">
+                        <div class="width-1 bg-1 h-100"></div>
+                        <div class="width-50 height-50 border border-color-1 rounded-circle flex-content-center font-italic bg-white position-absolute">
+                            <i class="bx bx-tada bx-pencil"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 ml-md-auto ml-xl-0 mr-xl-auto">
+                    <div>
+                        <img style="height: 200px" th:src="@{${review.product.mainImagePath}}"/>
+                    </div>
+
+                    <div>
+                        <div><h4>[[${review.product.name}]]</h4></div>
+                        <div>
+                            <span class="h4 text-success">Your Review has been posted!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- ========== END MAIN CONTENT ========== -->
+
+<div th:replace="fragments/common/footer :: content"></div>
+
+
+<div th:replace="fragments/common/secondary_contents :: content"></div>
+
+<div th:replace="fragments/login_register/sidebar_nav :: content"></div>
+
+<div th:replace="fragments/common/modal :: modal_confirm"></div>
+
+
+
+<!-- Go to Top -->
+<a class="js-go-to u-go-to" data-compensation="#header"
+   data-hide-effect="slideOutDown"
+   data-offset-top="400"
+   data-position='{"bottom": 15, "right": 15 }'
+   data-show-effect="slideInUp"
+   data-type="fixed"
+   href="my-account.html#">
+    <span class="fas fa-arrow-up u-go-to__inner"></span>
+</a>
+<!-- End Go to Top -->
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<!-- JS Global Compulsory -->
+<script th:src="@{/assets/vendor/jquery/dist/jquery.min.js}"></script>
+<script th:src="@{/assets/vendor/jquery-migrate/dist/jquery-migrate.min.js}"></script>
+<script th:src="@{/assets/vendor/popper.js/dist/umd/popper.min.js}"></script>
+<script th:src="@{/assets/vendor/bootstrap/bootstrap.min.js}"></script>
+
+<!-- JS Implementing Plugins -->
+
+<script th:src="@{/assets/vendor/appear.js}"></script>
+<script th:src="@{/assets/vendor/jquery.countdown.min.js}"></script>
+<script th:src="@{/assets/vendor/hs-megamenu/src/hs.megamenu.js}"></script>
+<script th:src="@{/assets/vendor/svg-injector/dist/svg-injector.min.js}"></script>
+<script th:src="@{/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js}"></script>
+<script th:src="@{/assets/vendor/jquery-validation/dist/jquery.validate.min.js}"></script>
+<script th:src="@{/assets/vendor/fancybox/jquery.fancybox.min.js}"></script>
+<script th:src="@{/assets/vendor/ion-rangeslider/js/ion.rangeSlider.min.js}"></script>
+<script th:src="@{/assets/vendor/typed.js/lib/typed.min.js}"></script>
+<script th:src="@{/assets/vendor/slick-carousel/slick/slick.js}"></script>
+<script th:src="@{/assets/vendor/appear.js}"></script>
+<script th:src="@{/assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js}"></script>
+
+
+<!-- JS Electro -->
+<script th:src="@{/assets/js/hs.core.js}"></script>
+<script th:src="@{/assets/js/components/hs.countdown.js}"></script>
+<script th:src="@{/assets/js/components/hs.header.js}"></script>
+<script th:src="@{/assets/js/components/hs.hamburgers.js}"></script>
+<script th:src="@{/assets/js/components/hs.unfold.js}"></script>
+<script th:src="@{/assets/js/components/hs.focus-state.js}"></script>
+<script th:src="@{/assets/js/components/hs.malihu-scrollbar.js}"></script>
+<script th:src="@{/assets/js/components/hs.validation.js}"></script>
+<script th:src="@{/assets/js/components/hs.fancybox.js}"></script>
+<script th:src="@{/assets/js/components/hs.onscroll-animation.js}"></script>
+<script th:src="@{/assets/js/components/hs.slick-carousel.js}"></script>
+<script th:src="@{/assets/js/components/hs.quantity-counter.js}"></script>
+<script th:src="@{/assets/js/components/hs.range-slider.js}"></script>
+<script th:src="@{/assets/js/components/hs.show-animation.js}"></script>
+<script th:src="@{/assets/js/components/hs.svg-injector.js}"></script>
+<script th:src="@{/assets/js/components/hs.scroll-nav.js}"></script>
+<script th:src="@{/assets/js/components/hs.go-to.js}"></script>
+<script th:src="@{/assets/js/components/hs.selectpicker.js}"></script>
+<script th:src="@{/assets/js/toast.js}"></script>
+<script th:src="@{/assets/js/sweetalert.min.js}"></script>
+<script th:src="@{/assets/js/common_list.js}"></script>
+
+<link th:href="@{/rating-star/css/star-rating.css}" media="all" rel="stylesheet" type="text/css" />
+<script th:src="@{/rating-star/js/star-rating.js}" type="text/javascript"></script>
+<link th:href="@{/rating-star/themes/krajee-svg/theme.css}" media="all" rel="stylesheet" type="text/css" />
+<script th:src="@{/rating-star/themes/krajee-svg/theme.js}"></script>
+
+
+<script>
+    $(".product-rating-star").rating({
+        displayOnly: true,
+        hoverOnClear: false,
+        showCaption: false,
+        theme: 'krajee-svg'
+    });
+
+
+    $(window).on('load', function () {
+        // initialization of HSMegaMenu component
+        $('.js-mega-menu').HSMegaMenu({
+            event: 'hover',
+            direction: 'horizontal',
+            pageContainer: $('.container'),
+            breakpoint: 767.98,
+            hideTimeOut: 0
+        });
+    });
+
+    $(document).on('ready', function () {
+        // initialization of header
+        $.HSCore.components.HSHeader.init($('#header'));
+
+        // initialization of animation
+        $.HSCore.components.HSOnScrollAnimation.init('[data-animation]');
+
+        // initialization of unfold component
+        $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+            afterOpen: function () {
+                $(this).find('input[type="search"]').focus();
+            }
+        });
+
+        // initialization of HSScrollNav component
+        $.HSCore.components.HSScrollNav.init($('.js-scroll-nav'), {
+            duration: 700
+        });
+
+        // initialization of quantity counter
+        $.HSCore.components.HSQantityCounter.init('.js-quantity');
+
+        // initialization of popups
+        $.HSCore.components.HSFancyBox.init('.js-fancybox');
+
+        // initialization of countdowns
+        var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
+            yearsElSelector: '.js-cd-years',
+            monthsElSelector: '.js-cd-months',
+            daysElSelector: '.js-cd-days',
+            hoursElSelector: '.js-cd-hours',
+            minutesElSelector: '.js-cd-minutes',
+            secondsElSelector: '.js-cd-seconds'
+        });
+
+        // initialization of malihu scrollbar
+        $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
+
+        // initialization of forms
+        $.HSCore.components.HSFocusState.init();
+
+        // initialization of form validation
+        $.HSCore.components.HSValidation.init('.js-validate', {
+            rules: {
+                confirmPassword: {
+                    equalTo: '#signupPassword'
+                }
+            }
+        });
+
+        // initialization of forms
+        $.HSCore.components.HSRangeSlider.init('.js-range-slider');
+
+        // initialization of show animations
+        $.HSCore.components.HSShowAnimation.init('.js-animation-link');
+
+        // initialization of fancybox
+        $.HSCore.components.HSFancyBox.init('.js-fancybox');
+
+        // initialization of slick carousel
+        $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+
+        // initialization of go to
+        $.HSCore.components.HSGoTo.init('.js-go-to');
+
+        // initialization of hamburgers
+        $.HSCore.components.HSHamburgers.init('#hamburgerTrigger');
+
+        // initialization of unfold component
+        $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+            beforeClose: function () {
+                $('#hamburgerTrigger').removeClass('is-active');
+            },
+            afterClose: function () {
+                $('#headerSidebarList .collapse.show').collapse('hide');
+            }
+        });
+
+        $('#headerSidebarList [data-toggle="collapse"]').on('click', function (e) {
+            e.preventDefault();
+
+            var target = $(this).data('target');
+
+            if ($(this).attr('aria-expanded') === "true") {
+                $(target).collapse('hide');
+            } else {
+                $(target).collapse('show');
+            }
+        });
+
+        // initialization of unfold component
+        $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
+
+        // initialization of select picker
+        $.HSCore.components.HSSelectPicker.init('.js-select');
+    });
+</script>
+</body>
+</html>

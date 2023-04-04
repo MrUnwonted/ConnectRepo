@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="content(moduleURL)" th:remove="tag">
+  <form th:action="@{${moduleURL} + '/page/1'}" class="form-inline m-3">
+    <input type="hidden" name="sortField" th:value="${sortField}" />
+    <input type="hidden" name="sortDir" th:value="${sortDir}" />
+    <input class="search__input form-control" type="search" th:value="${keyword}"  name="keyword" placeholder="Search" required>
+    &nbsp;&nbsp;
+    <button type="submit" class="btn btn-primary">
+      <i class="bx bx-search bx-tada"></i>
+    </button>
+    &nbsp;&nbsp;
+    <button type="button" class="btn btn-secondary" onclick="clearFilter()">
+      <i class="bx bx-eraser"></i>
+    </button>
+  </form>
+</div>
+</body>
+</html>

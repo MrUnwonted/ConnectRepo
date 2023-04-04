@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:fragment="status(enabled, entityName, entityURL)" th:remove="tag">
+  <td>
+    <a th:if="${enabled == true}" th:href="@{${entityURL} + '/enabled/false'}"><span class="badge bg-label-success me-1" th:title="'Disable this'+ ${entityName} ">Enabled</span></a>
+    <a th:if="${enabled == false}" th:href="@{${entityURL} + '/enabled/true'}"><span class="badge bg-label-danger me-1" th:title="'Enable this' +  ${entityName} ">Disabled</span></a>
+  </td>
+</div>
+
+</body>
+</html>

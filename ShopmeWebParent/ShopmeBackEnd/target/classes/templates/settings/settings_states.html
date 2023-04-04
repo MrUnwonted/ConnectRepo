@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" th:remove="tag">
+    <small class="text-light fw-semibold">Use this page to manage countries which will be displayed in the customer registration form. Click Load Country List first.</small>
+            <div class="card-body">
+                <div class="row gy-3">
+                    <div class="col-md-6 gy-3">
+                        <button type="button" id="buttonLoadCountriesForStates" class="btn btn-primary">
+                            <span class="tf-icons bx bxs-cloud-download"></span>&nbsp; Load Countries
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row my-3">
+                    <div class="col-sm-12">
+                        <div class="input-group input-group-merge">
+                            <label class="input-group-text">Countries</label>
+                            <select class="form-select" id="dropDownCountriesForStates">
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="formState">
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">State/Provinces </label>
+                    <div class="col-sm-10">
+                        <div class="input-group input-group-merge">
+                            <select class="form-control m-2" style="height: 300px" size="3" id="dropDownStates">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label" id="labelStateName">State/Province Name</label>
+                        <div class="col-sm-4">
+                            <div class="input-group input-group-merge">
+                                <input type="text" class="form-control" id="fieldStateName"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-end">
+                        <div class="demo-inline-spacing">
+                            <button type="button" value="" id="buttonAddState" class="btn btn-primary">
+                                <span class="tf-icons bx bx-plus"></span>&nbsp; New
+                            </button>
+                            <button type="button" id="buttonUpdateState" disabled="disabled" class="btn btn-secondary">
+                                <span class="tf-icons bx bx-upload"></span>&nbsp; Update
+                            </button>
+                            <button type="button" id="buttonDeleteState" disabled="disabled" class="btn btn-secondary">
+                                <span class="tf-icons bx bx-trash"></span>&nbsp; Delete
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+</div>
+</body>
+</html>

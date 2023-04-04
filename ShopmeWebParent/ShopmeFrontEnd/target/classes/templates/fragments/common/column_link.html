@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        class="light-style layout-menu-fixed"
+        dir="ltr"
+        data-theme="theme-default"
+        data-assets-path="../assets/"
+        data-template="vertical-menu-template-free"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head th:replace="fragments  :: page_head('Dashboard | Users','none')">
+</head>
+<body>
+                       <th th:fragment="column_link(fieldName, columnLabel, removeTag)" th:remove="${removeTag}">
+
+                          <a class="text-decoration-none text-dark"
+                             th:href="@{${moduleURL} + '/page/' + ${currentPage} + '?sortField=' + ${fieldName} + '&sortDir=' + ${sortField != fieldName ?  sortDir : reverseSortDir } + ${keyword != null ? '&keyword=' + keyword : '' } + ${ categoryId != null ? '&categoryId=' + categoryId : ''}  }">
+                            [[${columnLabel}]]
+                          </a>
+
+                          <span th:if="${sortField == fieldName}"
+                                th:class="${sortDir == 'asc' ? 'bx bx-caret-up' : 'bx bx-caret-down'}" ></span>
+
+                       </th>
+                        
+                        <a th:fragment="page_link(pageNum, label)"
+                         th:href="@{${moduleURL} +'/page/' + ${pageNum} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''} + ${ categoryId != null ? '&categoryId=' + categoryId : ''} }"
+                         class="page-link">
+                        [[${label}]]
+                        </a>
+                   
+
+</html>

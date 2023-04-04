@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="container" th:fragment="content">
+        <div class="row">
+            <div class="col-lg-5 order-lg-2 mb-7 mb-lg-0">
+                <div class="pl-lg-3 ">
+                    <div class="bg-gray-1 rounded-lg">
+                        <div class="media d-flex p-3 justify-content-between">
+                            <div class="">
+                                <h6 class="text-dark font-weight-bold">Email</h6>
+                                <span>[[${customer.email}]]</span>
+                            </div>
+                            <div class="">
+                                <i class="bx bx-envelope bx-md text-secondary bx-tada-hover font-large-2 float-right"></i>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="media d-flex p-3 justify-content-between">
+                            <div class="">
+                                <h6 class="text-dark font-weight-bold">Authentication</h6>
+                                <span>[[${customer.authenticationType}]]</span>
+                            </div>
+                            <div class="">
+                                <i class="bx bx-key bx-md text-secondary bx-tada-hover font-large-2 float-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-7 order-lg-1">
+                <div class="pb-7 mb-7">
+                    <!-- Title -->
+                    <div class="border-bottom border-color-1 mb-5">
+                        <h3 class="section-title mb-0 pb-2 font-size-25">Account details</h3>
+                    </div>
+                    <!-- End Title -->
+
+                    <form method="post" th:action="@{/update_account_details}" th:object="${customer}">
+                        <input th:field="*{id}" type="hidden">
+                        <input th:field="*{email}" type="hidden">
+                        <input th:field="*{authenticationType}" type="hidden">
+                        <!-- Billing Form -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <!-- Input -->
+                                <div class="js-form-message mb-6">
+                                    <label class="form-label">
+                                        First name
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input aria-label="firstName" autocomplete="off" class="form-control" data-error-class="u-has-error"
+                                           data-msg="Please enter valid frist name." data-success-class="u-has-success" name="firstName"
+                                           th:field="*{firstName}"
+                                           minlength="2"
+                                           maxlength="45"
+                                           required=""
+                                           type="text">
+                                </div>
+                                <!-- End Input -->
+                            </div>
+
+                            <div class="col-md-6">
+                                <!-- Input -->
+                                <div class="js-form-message mb-6">
+                                    <label class="form-label">
+                                        Last name
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input aria-label="lastName" class="form-control" data-error-class="u-has-error" data-msg="Please enter your last name."
+                                           data-success-class="u-has-success"
+                                           name="lastName"
+                                           th:field="*{lastName}"
+                                           minlength="2"
+                                           maxlength="45"
+                                           required="" type="text">
+                                </div>
+                                <!-- End Input -->
+                            </div>
+
+                            <div class="w-100"></div>
+
+                            <input class="form-control" id="reg-pass" hidden th:field="*{password}" minlength="8" maxlength="15" type="password">
+
+                            <div class="col-md-6">
+                                <!-- Input -->
+                                <div class="js-form-message mb-6">
+                                    <label class="form-label">
+                                        Phone
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input aria-label="Phone Number" class="form-control" data-error-class="u-has-error"
+                                           data-msg="Please enter valid Phone Number" data-success-class="u-has-success"
+                                           th:field="*{phoneNumber}"
+                                           minlength="8"
+                                           maxlength="15"
+                                           required=""
+                                           type="text">
+                                </div>
+                                <!-- End Input -->
+                            </div>
+
+                            <div class="col-md-12">
+                                <!-- Input -->
+                                <div class="js-form-message mb-6">
+                                    <label class="form-label">
+                                        Address Line 1
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input aria-label="Address Line 1" class="form-control" data-error-class="u-has-error"
+                                           data-msg="Please enter valid address." data-success-class="u-has-success"
+                                           name="addressLine1"
+                                           required=""
+                                           th:field="*{addressLine1}" minlength="3" maxlength="64"
+                                           type="text">
+                                </div>
+                                <!-- End Input -->
+                            </div>
+
+                            <div class="col-md-12">
+                                <!-- Input -->
+                                <div class="js-form-message mb-6">
+                                    <label class="form-label">
+                                        Address Line 2
+                                    </label>
+                                    <input aria-label="Address Line 1" class="form-control" data-error-class="u-has-error"
+                                           data-msg="Please enter valid address (Optional)*" data-success-class="u-has-success"
+                                           name="addressLine2"
+                                           th:field="*{addressLine2}" minlength="3" maxlength="64"
+                                           type="text">
+                                </div>
+                                <!-- End Input -->
+                            </div>
+
+                            <div class="col-md-12">
+                                <!-- Input -->
+                                <div class="js-form-message mb-6">
+                                    <label class="form-label">
+                                        Country
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select class="form-control js-select selectpicker dropdown-select" data-error-class="u-has-error"
+                                            data-live-search="true" data-msg="Please select country."
+                                            data-style="form-control border-color-1 font-weight-normal"
+                                            data-success-class="u-has-success"
+                                            th:field="*{country}"
+                                            id="country"
+                                            required="">
+                                        <th:block th:each="country : ${listCountries}">
+                                            <option th:value="${country.id}">[[${country.name}]]</option>
+                                        </th:block>
+                                    </select>
+                                </div>
+                                <!-- End Input -->
+                            </div>
+
+                            <div class="col-md-8">
+                                <!-- Input -->
+                                <div class="js-form-message mb-6">
+                                    <label class="form-label">
+                                        City
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input aria-label="City" class="form-control" data-error-class="u-has-error"
+                                           data-msg="Please enter your City." data-success-class="u-has-success" name="City"
+                                           required=""
+                                           th:field="*{city}"
+                                           minlength="2"
+                                           maxlength="45"
+                                           type="text">
+                                </div>
+                                <!-- End Input -->
+                            </div>
+
+                            <div class="col-md-4">
+                                <!-- Input -->
+                                <div class="js-form-message mb-6">
+                                    <label class="form-label">
+                                        States
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input aria-label="State" class="form-control" data-error-class="u-has-error" data-msg="Please enter your State."
+                                           data-success-class="u-has-success"
+                                           th:field="*{state}" minlength="3" maxlength="45"
+                                           required=""
+                                           id="states"
+                                           list="listStates"
+                                           type="text">
+                                    <datalist id="listStates"></datalist>
+                                </div>
+                                <!-- End Input -->
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <!-- Input -->
+                                <div class="js-form-message mb-6">
+                                    <label class="form-label">
+                                        Postcode/Zip
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input aria-label="postalCode" class="form-control" data-error-class="u-has-error" data-msg="Please enter a postcode or zip code."
+                                           data-success-class="u-has-success" name="postalCode"
+                                           th:field="*{postalCode}" minlength="2" maxlength="10"
+                                           required="" type="text">
+                                </div>
+                                <!-- End Input -->
+                            </div>
+
+                            <div class="w-100"></div>
+
+<!--                            <div class="col-md-12">-->
+<!--                                &lt;!&ndash; Input &ndash;&gt;-->
+<!--                                <div class="js-form-message mb-6">-->
+<!--                                    <label class="form-label">-->
+<!--                                        State-->
+<!--                                        <span class="text-danger">*</span>-->
+<!--                                    </label>-->
+<!--                                    <select class="form-control js-select selectpicker dropdown-select" data-error-class="u-has-error"-->
+<!--                                            data-live-search="true" data-msg="Please select state."-->
+<!--                                            data-style="form-control border-color-1 font-weight-normal"-->
+<!--                                            data-success-class="u-has-success"-->
+<!--                                            required="">-->
+<!--                                        <option value="">Select state</option>-->
+
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                                &lt;!&ndash; End Input &ndash;&gt;-->
+<!--                            </div>-->
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary-dark-w px-5">Update</button>
+                            </div>
+                        </div>
+                        <!-- End Billing Form -->
+
+                    </form>
+                </div>
+            </div>
+        </div>
+</div>
+</body>
+</html>

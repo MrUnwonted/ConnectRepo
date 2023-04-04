@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        class="light-style layout-menu-fixed"
+        dir="ltr"
+        data-theme="theme-default"
+        data-assets-path="../assets/"
+        data-template="vertical-menu-template-free"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head th:replace="fragments  :: page_head('Dashboard | Reviews','none')">
+</head>
+
+  <body>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        <aside th:replace="fragments :: page_sidebar">
+        </aside>
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+
+          <nav th:replace="fragments :: page_navbar">
+          </nav>
+
+          <!-- / Navbar -->
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-p-y">
+              <h4 class="fw-bold py-3 mb-2"><span class="text-muted fw-light">REVIEWS /</span> All Reviews</h4>
+              <div th:if="${message != null}" class="alert alert-success alert-dismissible" role="alert">
+                [[${message}]]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+
+
+          	<div class="demo-inline-spacing mb-5">
+
+                        <div class="btn-group">
+                          <button
+                            type="button"
+                            class="btn btn-primary  rounded-pill dropdown-toggle hide-arrow"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                          >
+                            <i class="bx bxs-file-export"></i>&nbsp;Export To
+                          </button>
+                          <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" th:href="@{/reviews/export/csv}"><i class='bx bx-file'></i>&nbsp;CSV</a></li>
+                          </ul>
+                        </div>
+                        </div>
+
+              <div th:replace="fragments/search_filter :: search()">
+
+              </div>
+
+              <div class="card">
+                <h5 class="card-header">Reviews</h5>
+                <div class="table-responsive text-nowrap">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th th:replace="fragments/column_link :: column_link('id', 'Id', 'none')"></th>
+                        <th th:replace="fragments/column_link :: column_link('product', 'Product', 'none')"></th>
+                        <th th:replace="fragments/column_link :: column_link('customer', 'Customer', 'none')"></th>
+                        <th th:replace="fragments/column_link :: column_link('rating', 'Rating', 'none')"></th>
+                        <th th:replace="fragments/column_link :: column_link('reviewTime', 'Review Time', 'none')"></th>
+                        <th class="text-decoration-none text-dark">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                      <tr th:each="review : ${listReviews}">
+                        <td><strong>[[${review.id}]]</strong></td>
+                        <td>
+                          <a th:href="@{'/products/detail/' + ${review.product.id }}" class="link-detail-product">
+                            [[${review.product.shortName}]]
+                          </a>
+                        </td>
+                        <td>
+                          <a th:href="@{'/customers/detail/' + ${review.customer.id}}" class="link-detail-customer">
+                            [[${review.customer.fullName}]]
+                          </a>
+                        </td>
+                        <td>[[${review.rating}]] <i class="bx bx-star"></i></td>
+                        <td>[[${review.reviewTime}]]</td>
+                        <td>
+                          <div class="dropdown">
+                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                              <i class="bx bx-dots-vertical-rounded"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                              <a class="dropdown-item link-detail-review" th:href="@{'/reviews/detail/' + ${review.id}}"
+                              ><i class="bx bx-file me-1"></i> Details</a>
+
+                              <a class="dropdown-item delete-link"
+                                 th:href="@{'/reviews/delete/'+ ${review.id}}"
+                                 th:entityId="${review.id}"><i class="bx bx-trash me-1">
+                              </i> Delete</a>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <hr class="my-3" />
+
+              <div th:replace="fragments/pagination :: pagination('Reviews', '/reviews')"></div>
+
+
+              <div th:replace="modal :: modal_confirm"></div>
+
+              <div class="modal fade " id="xlargeModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-xl" role="document">
+                  <div class="modal-content">
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal fade " id="largeModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                  </div>
+                </div>
+              </div>
+
+
+              <hr class="my-5" />
+
+            </div>
+            <!-- / Content -->
+
+            <!-- Footer -->
+            <footer th:replace="fragments :: page_footer">
+            </footer>
+            <!-- / Footer -->
+
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
+
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+
+    <script type="text/javascript" th:src="@{/js/common_list.js}"></script>
+
+    <script type="text/javascript">
+      moduleURL = "[[@{/reviews}]]";
+
+      $(document).ready(function() {
+        handleDeleteLink();
+        handleProductDetailLink();
+        handleCustomerDetailLink();
+        handleReviewDetailLink();
+      });
+
+      function handleDeleteLink() {
+        $(".delete-link").on("click", function(e) {
+          e.preventDefault();
+          showDeleteConfirmationModal($(this), 'review');
+        });
+      }
+
+      function handleDetailLinkClick(cssClass, modalId) {
+        $(cssClass).on("click", function(e) {
+          e.preventDefault();
+          linkDetailURL = $(this).attr("href");
+          $(modalId).modal("show").find(".modal-content").load(linkDetailURL);
+        });
+      }
+
+      function handleProductDetailLink() {
+        handleDetailLinkClick(".link-detail-product", "#xlargeModal");
+      }
+
+      function handleCustomerDetailLink() {
+        handleDetailLinkClick(".link-detail-customer", "#largeModal");
+      }
+
+      function handleReviewDetailLink() {
+        handleDetailLinkClick(".link-detail-review", "#largeModal");
+      }
+
+      function clearFilter(){
+        window.location = "[[@{/reviews}]]"
+      }
+    </script>
+
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script th:src="@{/assets/vendor/libs/jquery/jquery.js}"></script>
+    <script th:src="@{/assets/vendor/libs/popper/popper.js}"></script>
+    <script th:src="@{/assets/vendor/js/bootstrap.js}"></script>
+    <script th:src="@{/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+
+    <script th:src="@{/assets/vendor/js/menu.js}"></script>
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+    <script th:src="@{/assets/vendor/libs/apex-charts/apexcharts.js}"></script>
+
+    <!-- Main JS -->
+    <script th:src="@{/assets/js/main.js}"></script>
+
+    <!-- Page JS -->
+    <script th:src="@{/assets/js/dashboards-analytics.js}"></script>
+
+  </body>
+</html>

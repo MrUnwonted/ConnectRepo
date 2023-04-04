@@ -1,0 +1,76 @@
+<div class="modal-header">
+    <h4 class="modal-title">Review Details</h4>
+    <button class="close" data-dismiss="modal" type="button">&times;</button>
+</div>
+
+<div>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active p-3" id="overview" role="tabpanel">
+
+            <div class="container-fluid order-overview">
+
+                <div class="container">
+                    <!-- Title -->
+                    <div class="d-flex justify-content-between align-items-center py-3">
+                        <h2 class="h5 mb-0"><a class="text-muted" href="#"></a> Review #[[${review.id}]]</h2>
+                    </div>
+
+                    <!-- Main content -->
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <!-- Details -->
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <table class="table table-borderless">
+                                        <tbody>
+                                            <tr th:with="product = ${review.product}">
+                                                <td>
+                                                    <div class="d-flex mb-2">
+                                                        <div class="flex-shrink-0">
+                                                            <img alt="" class="img-fluid" th:src="@{${product.mainImagePath}}"
+                                                                 width="35">
+                                                        </div>
+                                                        <div class="flex-lg-grow-1 ms-3">
+                                                            <h6 class="small mb-0"><a class="text-reset" href="#">[[${product.name}]]</a></h6>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- Payment -->
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                                Time:
+                                            <div th:replace="fragments/common/currency_time :: format_time(${review.reviewTime})"></div>
+                                            <span class="badge bg-success rounded-pill">Votes: [[${review.votes}]]</span></p>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <h3 class="h6">Review</h3>
+                                            <address>
+                                                <strong>[[${review.headline}]]</strong><br>
+                                                [[${review.comment}]]
+                                            </address>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+<div class="modal-footer">
+    <button class="btn btn-danger" data-dismiss="modal" type="button">Close</button>
+</div>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- beautify ignore:start -->
+<html
+        lang="en"
+        class="light-style layout-menu-fixed"
+        dir="ltr"
+        data-theme="theme-default"
+        data-assets-path="../assets/"
+        data-template="vertical-menu-template-free"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+
+
+<body>
+
+<div th:fragment="content" >
+    <!-- breadcrumb -->
+    <div class="bg-gray-13 bg-md-transparent">
+        <div class="container">
+            <!-- breadcrumb -->
+            <div class="my-md-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a th:href="@{/}">Home</a></li>
+                        <th:block th:each="parent : ${listCategoryParents}">
+                            <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a th:href="@{'/c/'+ ${parent.alias}}">[[${parent.name}]]</a></li>
+                        </th:block>
+                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page" th:if="${product != null}">[[${product.shortName}]]</li>
+                    </ol>
+                </nav>
+            </div>
+            <!-- End breadcrumb -->
+        </div>
+    </div>
+    <!-- End breadcrumb -->
+</div>
+
+</body>
+</html>

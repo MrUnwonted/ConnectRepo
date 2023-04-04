@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div th:fragment="search()" th:remove="tag">
+  <div class="mb-2">
+    <form th:action="@{${moduleURL} + '/page/1'}" class="form-inline">
+      <div class="row">
+        <input type="hidden" name="sortField" th:value="${sortField}">
+        <input type="hidden" name="sortDir" th:value="${sortDir}">
+        <div class="col-md-6">
+          <div class="input-group input-group-merge">
+            <span class="input-group-text" id="basic-addon-search31"><i class="bx bx-search"></i></span>
+            <input
+                    type="search"
+                    name="keyword"
+                    th:value="${keyword}"
+                    required
+                    class="form-control"
+                    placeholder="Search..."
+                    aria-label="Search..."
+                    aria-describedby="basic-addon-search31"
+            />
+            &nbsp;&nbsp;
+            <button type="submit" class="btn btn-outline-primary"><i class='bx bx-search-alt'></i></button>
+            <button type="button" value="clear" class="btn btn-outline-secondary" onclick="clearFilter()"><i class='bx bx-reset'></i></button>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

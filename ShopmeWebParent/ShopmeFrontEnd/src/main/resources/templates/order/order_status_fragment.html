@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="content(statusVar, iconName, label)" th:remove="tag">
+  <th:block th:with="iconColor = ${statusVar ? 'active' : ''}">
+    <div th:class="'step ' + ${iconColor}"><span class="icon"> <i th:class="'bx ' + ${iconName}"></i> </span>
+      <span class="text">[[${label}]]</span></div>
+  </th:block>
+</div>

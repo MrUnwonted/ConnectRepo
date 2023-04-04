@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="content" th:remove="tag">
+
+  <th:block th:each="review : ${listReviews}" th:fragment="reviewContent">
+    <!-- Review -->
+    <div class="border-bottom border-color-1 pb-4 mb-4">
+      <!-- Review Rating -->
+      <div class="d-flex justify-content-start align-items-center text-secondary font-size-1 mb-2">
+        <div class="col-xs">
+          <input type="text" class="product-detail-rating-star" dir="ltr" data-size="xs"
+                 th:value="${review.rating}"/>
+        </div>
+        <div class="col-xs ml-2">
+          <a class="linkVoteReview fa-thumbs-up text-blue"
+             th:classappend="${review.upvotedByCurrentCustomer ? 'fas' : 'far'}"
+             th:id="'linkVoteUp-' + ${review.id}"
+             th:reviewId="${review.id}"
+             th:href="@{'/vote_review/' + ${review.id} + '/up'}"></a>
+        </div>
+
+        <div class="col-xs ml-2">
+          <span th:id="'voteCount-' + ${review.id}">[[${review.votes}]] Votes</span>
+        </div>
+
+        <div class="col-xs ml-2">
+          <a class="linkVoteReview fa-thumbs-down text-blue"
+             th:classappend="${review.downvotedByCurrentCustomer ? 'fas' : 'far'}"
+             th:id="'linkVoteDown-' + ${review.id}"
+             th:reviewId="${review.id}"
+             th:href="@{'/vote_review/' + ${review.id} + '/down'}"></a>
+        </div>
+      </div>
+      <!-- End Review Rating -->
+
+      <strong>[[${review.headline}]]</strong>
+      <p class="text-gray-90">[[${review.comment}]]</p>
+
+      <!-- Reviewer -->
+      <div class="mb-2">
+        <strong>[[${review.customer.fullName}]]</strong>
+        <span class="font-size-13 text-gray-23">- <span class="ml-5" th:text="${#dates.format(review.reviewTime, 'E, dd MMM yyyy')}"></span></span>
+      </div>
+      <!-- End Reviewer -->
+    </div>
+    <!-- End Review -->
+  </th:block>
+</div>
+</body>
+</html>

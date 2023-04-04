@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/ShopmeBackEnd.iml" filepath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/ShopmeBackEnd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ShopmeCommon/ShopmeCommon.iml" filepath="$PROJECT_DIR$/ShopmeCommon/ShopmeCommon.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/ShopmeFrontEnd.iml" filepath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/ShopmeFrontEnd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ShopmeProject.iml" filepath="$PROJECT_DIR$/ShopmeProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ShopmeWebParent/ShopmeWebParent.iml" filepath="$PROJECT_DIR$/ShopmeWebParent/ShopmeWebParent.iml" />
+    </modules>
+  </component>
+</project>

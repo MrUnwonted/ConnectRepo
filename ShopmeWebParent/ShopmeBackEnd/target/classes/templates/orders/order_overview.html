@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="content">
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label"
+               for="name">Order Id</label>
+        <div class="col-sm-10">
+            <div class="">
+                <span class="input-group-text">[[${order.id}]]</span>
+            </div>
+        </div>
+    </div>
+
+
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">Customer</label>
+            <div class="col-sm-10">
+                <div class="">
+                    <span class="input-group-text">[[${order.customer.fullName}]]</span>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">Product Cost</label>
+            <div class="col-sm-10">
+                <div class="input-group">
+                    <input class="form-control"
+                           required
+                           th:field="*{productCost}"
+                           type="text"
+                    />
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">Subtotal</label>
+            <div class="col-sm-10">
+                <div class="input-group">
+                    <input class="form-control"
+                           required
+                           th:field="*{subtotal}"
+                           type="text"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">Shipping Cost</label>
+            <div class="col-sm-10">
+                <div class="input-group">
+                    <input class="form-control"
+                           required
+                           th:field="*{shippingCost}"
+                           type="text"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">Tax</label>
+            <div class="col-sm-10">
+                <div class="input-group">
+                    <input class="form-control"
+                           required
+                           th:field="*{tax}"
+                           type="text"
+                    />
+                </div>
+            </div>
+        </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Total</label>
+        <div class="col-sm-10">
+            <div class="input-group">
+                <input class="form-control"
+                       required
+                       th:field="*{total}"
+                       type="text"
+                />
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Payment Method</label>
+        <div class="col-sm-10">
+            <div class="input-group">
+                <select class="form-select" required th:field="*{paymentMethod}">
+                    <option th:each="pm: ${T(com.ecommerce.common.entity.order.PaymentMethod).values()}"
+                            th:text="${pm}" th:value="${pm}"/>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Status</label>
+        <div class="col-sm-10">
+            <div class="input-group">
+                <select class="form-select" required th:field="*{status}">
+                    <option th:each="os: ${T(com.ecommerce.common.entity.order.OrderStatus).values()}" th:text="${os}"
+                            th:value="${os}"/>
+                </select>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

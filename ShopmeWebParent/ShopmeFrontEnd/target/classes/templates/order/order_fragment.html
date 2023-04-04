@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="order-list" th:fragment="content">
+
+
+    <div class="container my-5">
+        <div class="text-center mb-5">
+            <span class="text-secondary text-uppercase">Orders</span>
+            <h1 class="text-capitalize font-weight-bold">All <span class="headline">orders</span></h1>
+        </div>
+
+        <th:block th:each="order : ${listOrders}">
+            <div class="my-5 py-4 px-5 bg-light d-sm-flex align-items-center justify-content-between">
+                <div class="text-center">
+                    <span>Order Id: [[${order.id}]]</span>
+                    <h1 class="my-2 font-weight-bold">
+                        <div th:replace="fragments/common/currency_time :: format_currency(${order.total})"></div>
+                    </h1>
+                    <small class="d-block my-3 text-secondary">
+                        <div th:replace="fragments/common/currency_time :: format_time(${order.orderTime})"></div>
+                    </small>
+                </div>
+                <div class="text-center text-uppercase text-secondary">
+                    <small class="d-block" th:utext="${order.productNames}"></small>
+                </div>
+                <div class="text-center text-uppercase text-secondary">
+                    <small class="d-block" th:class="'textOrderStatus' + ${order.id}">
+                        <span th:class="'textOrderStatus' + ${order.id}">
+                            <span class="status-indicator status-indicator--returned"
+                                  th:if="${order.status == order.status.RETURN_REQUESTED || order.status == order.status.RETURNED }"></span>
+                        <span class="status-indicator status-indicator--delivered"
+                              th:if="${order.status == order.status.DELIVERED || order.status == order.status.PICKED || order.status == order.status.SHIPPING || order.status == order.status.PROCESSING}"></span>
+                        <span class="status-indicator status-indicator--processing"
+                              th:if="${order.status == order.status.NEW }"></span>
+                        [[${order.status}]]
+                        </span>
+                    </small>
+
+                    <th:block th:if="${order.returnRequested == false && order.delivered == true && order.returned == false}">
+                        &nbsp;&nbsp;&nbsp;
+                        <small class="d-block">
+                            <a class="text-blue linkReturnOrder"
+                               th:classappend="'linkReturn' + ${order.id}"
+                               th:orderId="${order.id}"
+                               href=""
+                               title="Return this order">Return?</a>
+                        </small>
+                    </th:block>
+                </div>
+                <div class="text-center">
+                    <a class="btn text-white px-5 py-3 main-btn linkDetail" th:href="@{'/orders/detail/' + ${order.id}}"
+                       title="View details of this order">View</a>
+                </div>
+            </div>
+        </th:block>
+
+    </div>
+
+</div>
+</body>
+</html>

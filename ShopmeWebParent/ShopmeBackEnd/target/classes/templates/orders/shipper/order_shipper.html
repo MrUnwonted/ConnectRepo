@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html
+        class="light-style layout-menu-fixed"
+        data-assets-path="../assets/"
+        data-template="vertical-menu-template-free"
+        data-theme="theme-default"
+        dir="ltr"
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head th:replace="fragments  :: page_head('Shipper | Orders','none')">
+</head>
+
+<body>
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+    <div class="layout-container">
+
+        <!-- Menu -->
+        <aside th:replace="fragments :: page_sidebar"></aside>
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+
+            <!-- Navbar -->
+            <nav th:replace="fragments :: page_navbar"></nav>
+            <!-- / Navbar -->
+
+            <!-- Content wrapper -->
+            <div class="content-wrapper">
+
+                <!-- Content -->
+                <div class="container-xxl flex-grow-1 container-p-y">
+                    <h4 class="fw-bold py-3 mb-2"><span class="text-muted fw-light">ORDERS /</span> All Orders</h4>
+                    <div class="alert alert-success alert-dismissible" role="alert" th:if="${message != null}">
+                        [[${message}]]
+                        <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"></button>
+                    </div>
+
+
+                    <div class="demo-inline-spacing mb-5">
+
+                        <div class="btn-group">
+                            <button
+                                    aria-expanded="false"
+                                    class="btn btn-primary  rounded-pill dropdown-toggle hide-arrow"
+                                    data-bs-toggle="dropdown"
+                                    type="button"
+                            >
+                                <i class="bx bxs-file-export"></i>&nbsp;Export To
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" th:href="@{/orders/export/csv}"><i class='bx bx-file'></i>&nbsp;CSV</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div th:replace="fragments/search_filter :: search()">
+
+                    </div>
+
+                    <div class="container-xxl flex-grow-1 container-p-y">
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">All Orders /</span> Shipper</h4>
+
+                        <!-- Examples -->
+                        <div class="row mb-5">
+
+                            <th:block th:each="order: ${listOrders}">
+
+                                <div class="col-md-6 col-lg-4 mb-3">
+                                    <div class="card h-100">
+                                        <div class="card-header">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <span class="card-title">Order ID #[[${order.id}]]</span>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="float-right">
+                                                        <a class="order-detail"
+                                                           th:href="@{'/orders/detail/' + ${order.id}}"
+                                                           title="View details of this order"><i class="bx bx-file me-1"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <i class="bx bxs-user"></i>
+                                                <b>&nbsp;[[${order.recipientName}]]</b>
+                                            </div>
+                                            <div>
+                                                <i class="bx bxs-home"></i>
+                                                &nbsp;[[${order.recipientAddress}]]
+                                            </div>
+                                            <div>
+                                                <i class="bx bx-phone"></i>
+                                                &nbsp;[[${order.phoneNumber}]]
+                                            </div>
+                                            <div th:if="${order.COD}">
+                                                <span>COD: <b>&nbsp;<div th:replace="order/order_fragment :: format_currency(${order.total})"></div></b></span>
+                                            </div>
+                                            <div th:unless="${order.COD}">
+                                                <h6 class="card-subtitle text-muted">Paid online</h6>ft
+                                            </div>
+
+                                            <div class="row mt-3">
+                                                <div th:replace="order/shipper/order_status_fragment :: content(${order.picked}, 'PICKED', 'bxs-package')"></div>
+                                                <div th:replace="order/shipper/order_status_fragment :: content(${order.shipping}, 'SHIPPING', 'bxs-truck')"></div>
+                                                <div th:replace="order/shipper/order_status_fragment :: content(${order.delivered}, 'DELIVERED', 'bxl-dropbox')"></div>
+                                                <div th:replace="order/shipper/order_status_fragment :: content(${order.returned}, 'RETURNED', 'bx-revision')"></div>
+                                            </div>
+                                            <div>&nbsp;</div>
+                                            <h6 class="card-subtitle text-muted">Support card subtitle</h6>ft
+                                            <p class="card-text">Bear claw sesame snaps gummies chocolate.</p>
+                                            <a class="card-link" href="javascript:void(0);">Card link</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </th:block>
+                        </div>
+                        <!-- Examples -->
+
+                        <hr class="my-3"/>
+
+                        <div th:replace="fragments/pagination :: pagination('orders','/orders')"></div>
+
+                        <div class="modal fade text-center" id="confirmModal" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Update Confirmation</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <span id="confirmText"></span>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <a class="btn btn-secondary" href="" id="yesButton">Yes</a>
+                                        <button type="button" class="btn btn-primary" id="noButton" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div aria-hidden="true" class="modal fade " id="orderDetailModal" tabindex="-1">
+                            <div class="modal-dialog modal-xl" role="document">
+                                <div class="modal-content">
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-5"/>
+
+                    </div>
+                    <!-- / Content -->
+
+                    <!-- Footer -->
+                    <footer th:replace="fragments :: page_footer"></footer>
+                    <!-- / Footer -->
+
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!-- Content wrapper -->
+            </div>
+            <!-- / Layout page -->
+        </div>
+
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
+    </div>
+    <!-- / Layout wrapper -->
+</div>
+<script th:src="@{/js/common_list.js}" type="text/javascript"></script>
+<script th:src="@{/js/countries_setting.js}" type="text/javascript"></script>
+<script type="text/javascript">
+    moduleURL = "[[@{/orders}]]";
+    var csrfHeaderName = "[[${_csrf.headerName}]]";
+    var csrfValue = "[[${_csrf.token}]]";
+
+    $(document).ready(function () {
+        $("[name='keyword']").attr("placeholder", "Type #number to search by Order ID.")
+
+        $(".order-detail").on("click", function (e) {
+            console.log("here")
+            e.preventDefault();
+            linkDetailUrl = $(this).attr("href");
+            console.log(linkDetailUrl)
+            $("#orderDetailModal").modal("show").find(".modal-content").load(linkDetailUrl);
+        })
+    })
+
+    function clearFilter() {
+        window.location = "[[@{/orders}]]"
+    }
+</script>
+
+<script type="text/javascript" th:src="@{/js/common_form.js}"></script>
+<script th:src="@{/js/orders/order_shipper.js}" type="text/javascript"></script>
+
+<!-- Core JS -->
+<!-- build:js assets/vendor/js/core.js -->
+<script th:src="@{/assets/vendor/libs/jquery/jquery.js}"></script>
+<script th:src="@{/assets/vendor/libs/popper/popper.js}"></script>
+<script th:src="@{/assets/vendor/js/bootstrap.js}"></script>
+<script th:src="@{/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
+<script th:src="@{/assets/vendor/js/menu.js}"></script>
+<!-- endbuild -->
+<!-- Vendors JS -->
+<script th:src="@{/assets/vendor/libs/apex-charts/apexcharts.js}"></script>
+<!-- Main JS -->
+<script th:src="@{/assets/js/main.js}"></script>
+<!-- Page JS -->
+<script th:src="@{/assets/js/dashboards-analytics.js}"></script>
+
+</body>
+</html>

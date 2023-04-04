@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="content" th:remove="tag">
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Length (inch)</label>
+        <div class="col-sm-10">
+            <div class="input-group input-group-merge">
+                <input type="text"
+                       class="form-control"
+                       th:value="${product.length}"
+                       disabled
+                       aria-describedby="length"/>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Width (inch)</label>
+        <div class="col-sm-10">
+            <div class="input-group input-group-merge">
+                <input type="text"
+                       class="form-control"
+                       th:value="${product.width}"
+                       disabled
+                       aria-describedby="width"/>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Height (inch)</label>
+        <div class="col-sm-10">
+            <div class="input-group input-group-merge">
+                <input type="text"
+                       class="form-control"
+                       th:value="${product.height}"
+                       disabled
+                       aria-describedby="height"/>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Weight (pounds)</label>
+        <div class="col-sm-10">
+            <div class="input-group input-group-merge">
+                <input type="text"
+                       class="form-control"
+                       th:value="${product.width}"
+                       disabled
+                       aria-describedby="width"/>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

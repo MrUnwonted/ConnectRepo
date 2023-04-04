@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!-- beautify ignore:start -->
+<html
+        class="light-style layout-menu-fixed"
+        data-assets-path="../assets/"
+        data-template="vertical-menu-template-free"
+        data-theme="theme-default"
+        dir="ltr"
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+>
+
+
+<body>
+
+<div th:fragment="content" class="modal fade text-center" id="addProductModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalTitle">Add Product</h4>
+                <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                ></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="embed-responsive embed-responsive-21by9">
+                    <iframe class="embed-responsive-item" width="100%" style="height: 40vh"></iframe>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
