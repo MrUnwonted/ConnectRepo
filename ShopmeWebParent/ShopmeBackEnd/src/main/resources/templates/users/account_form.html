@@ -1,257 +1,106 @@
 <!DOCTYPE html>
-<!-- beautify ignore:start -->
-<html
-        lang="en"
-        class="light-style layout-menu-fixed"
-        dir="ltr"
-        data-theme="theme-default"
-        data-assets-path="../assets/"
-        data-template="vertical-menu-template-free"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
->
-<head th:replace="fragments  :: page_head('Profile | Your Account Details','none')">
-</head>
-
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('Your Account Details', 'none')" />
 <body>
-<!--&lt;!&ndash; Layout wrapper &ndash;&gt;-->
-<div class="layout-wrapper layout-content-navbar">
-    <div class="layout-container">
-        <!-- Menu -->
+<div class="container-fluid">
+	<div th:replace="navigation :: menu"></div>
 
-        <aside th:replace="fragments :: page_sidebar">
-        </aside>
-        <!-- / Menu -->
+	
+	<form th:action="@{/account/update}" method="post" style="max-width: 700px; margin: 0 auto"
+		enctype="multipart/form-data"
+		th:object="${user}">
+		<input type="hidden" th:field="*{id}" />
+	<div class="text-center">
+		<h2>Your Account Details</h2>	
+	</div>		
+	
+	<div th:if="${message != null}" class="alert alert-success text-center">
+		[[${message}]]
+	</div>	
+	
+	<div class="border border-secondary rounded p-3">
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">E-mail:</label>
+			<div class="col-sm-8">
+				<input type="email" class="form-control" th:field="*{email}" readonly="readonly" />
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">First Name:</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control" th:field="*{firstName}" required minlength="2" maxlength="45"  />
+			</div>
+		</div>		
+		
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">Last Name:</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control" th:field="*{lastName}" required minlength="2" maxlength="45"  />
+			</div>
+		</div>		
+		
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">Password:</label>
+			<div class="col-sm-8">
+				<input type="password" th:field="*{password}" class="form-control"
+					placeholder="leave blank if you don't want to change password"
+					minlength="8" maxlength="20"
+					oninput="checkPasswordMatch(document.getElementById('confirmPassword'))"
+				  />
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">Confirm Password:</label>
+			<div class="col-sm-8">
+				<input type="password" id="confirmPassword" class="form-control"
+					minlength="8" maxlength="20"
+					oninput="checkPasswordMatch(this)"			
+				  />
+			</div>
+		</div>		
 
-        <!-- Layout container -->
-        <div class="layout-page">
-            <!-- Navbar -->
-
-            <nav th:replace="fragments :: page_navbar">
-            </nav>
-
-            <!-- / Navbar -->
-
-            <!--             Content wrapper-->
-            <div class="content-wrapper">
-                <!-- Content -->
-
-                <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Account/</span> Profile</h4>
-
-                    <div th:if="${message != null}" class="alert alert-success alert-dismissible" role="alert">
-                        [[${message}]]
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-
-                    <!-- User Adding Form -->
-                    <div class="row">
-                        <div class="col-xxl">
-                            <div class="card mb-4">
-                                <div class="card-header d-flex align-items-center justify-content-between">
-                                    <h5 class="mb-0">Your Account Details</h5>
-                                    <small class="text-muted float-end">User Details</small>
-                                </div>
-                                <div class="card-body">
-
-                                    <form th:object="${user}"
-                                          th:action="@{/account/update}"
-                                          method="post"
-                                          enctype="multipart/form-data"
-                                          >
-                                        <input type="hidden" th:field="*{id}">
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label"
-                                                   for="email">Email</label>
-                                            <div class="col-sm-10">
-                                                <div class="input-group input-group-merge">
-                                                    <span class="input-group-text"><i class="bx bx-envelope"></i></span>
-                                                    <input type="email"
-                                                           id="email"
-                                                           class="form-control"
-                                                           placeholder="Your Email"
-                                                           aria-label="email"
-                                                           th:field="*{email}"
-                                                           readonly="readonly"                                                         aria-describedby="email"
-                                                    />
-                                                    <span id="basic-icon-default-email2" class="input-group-text">@example.com</span>
-                                                </div>
-                                                <div class="form-text">You cannot change your email!</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname2">Full
-                                                Name</label>
-                                            <div class="col-sm-10">
-
-                                                <div class="input-group">
-                              <span id="basic-icon-default-fullname2" class="input-group-text"
-                              ><i class="bx bx-user"></i
-                              ></span>
-                                                    <input type="text"
-                                                           aria-label="First name"
-                                                           placeholder="First Name"
-                                                           th:field="*{firstName}"
-                                                           required
-                                                           minlength="3"
-                                                           maxlength="45"
-                                                           class="form-control"/>
-                                                    <input type="text"
-                                                           aria-label="Last name"
-                                                           placeholder="Last Name"
-                                                           th:field="*{lastName}"
-                                                           required
-                                                           minlength="3"
-                                                           class="form-control"/>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
-                                        <div class="row mb-3 form-password-toggle">
-                                            <label class="col-sm-2 form-label"
-                                                   for="password">Password</label>
-                                            <div class="col-sm-10">
-                                                <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-password" class="input-group-text"
-                                ><i class="bx bx-lock"></i
-                                ></span>
-                                                    <input
-                                                            type="password"
-                                                            th:field="*{password}"
-                                                            minlength="8"
-                                                            maxlength="20"
-                                                            class="form-control"
-                                                            id="password"
-                                                            oninput="checkPasswordMatch(document.getElementById('confirmPassword'))"
-                                                            name="password"
-                                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                                            aria-describedby="password"
-                                                    />
-                                                    <span class="input-group-text cursor-pointer"
-                                                    ><i class="bx bx-hide"></i
-                                                    ></span>
-                                                </div>
-                                                <div class="form-text">Leave blank if you don't want to change password.</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3 form-password-toggle">
-                                            <label class="col-sm-2 form-label"
-                                                   for="confirmPassword">Confirm Password</label>
-                                            <div class="col-sm-10">
-                                                <div class="input-group input-group-merge">
-                                <span id="confirm-password" class="input-group-text"
-                                ><i class="bx bx-lock"></i
-                                ></span>
-                                                    <input
-                                                            type="password"
-                                                            minlength="8"
-                                                            maxlength="20"
-                                                            class="form-control"
-                                                            id="confirmPassword"
-                                                            oninput="checkPasswordMatch(this)"
-                                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                                            aria-describedby="confirmPassword"
-                                                    />
-                                                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                                                </div>
-                                                <div class="form-text">Re-enter the password (if want to change)</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label" for="defaultCheck1">Your Roles: </label>
-                                            <div class="col-sm-10">
-                                                <div class="col-md">
-                                                    <small class="text-light fw-semibold">Assigned roles</small>
-                                                    <span class="text-secondary"><b>[[${user.roles}]]</b></span>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label" for="fileImage">Photos</label>
-                                            <div class="col-sm-8 form-row">
-                                                <div class="input-group input-group-merge col">
-                                                    <input type="hidden" th:field="*{photos}" />
-                                                    <span class="input-group-text"><i class="bx bx-user"></i></span>
-                                                    <input class="form-control" id="fileImage" name="image" type="file" accept="image/png, imaage/jpeg"/>
-                                                </div>
-                                                <div class="col mt-3">
-                                                    <img th:src="@{${user.photosImagePath}}" alt="Photo preview" class="img-fluid w-px-150 h-px-150" id="thumbnail">
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="row justify-content-end">
-                                            <div class="col-sm-10">
-                                                <button type="submit" class="btn btn-primary">Save</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--                / Content -->
-
-            <!-- Footer -->
-            <footer th:replace="fragments :: page_footer">
-            </footer>
-            <!-- / Footer -->
-
-            <div class="content-backdrop fade"></div>
-        </div>
-        <!-- Content wrapper -->
-    </div>
-    <!-- / Layout page -->
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">Assigned Roles:</label>
+			<div class="col-sm-8">
+				<span><b>[[${user.roles}]]</b></span>
+			</div>
+		</div>	
+		
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">Photos:</label>
+			<div class="col-sm-8">
+				<input type="hidden" th:field="*{photos}" />
+				<input type="file" id="fileImage" name="image" accept="image/png, image/jpeg"
+					class="mb-2" />
+				<img id="thumbnail" alt="Photos preview" th:src="@{${user.photosImagePath}}"
+					class="img-fluid" />
+			</div>
+		</div>						
+				
+		<div class="text-center">
+			<input type="submit" value="Save" class="btn btn-primary m-3" />
+			<input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancel" />
+		</div>
+	</div>
+	</form>
+	
+	<div th:replace="fragments :: footer"></div>
+	
 </div>
-
-<!-- Overlay -->
-<div class="layout-overlay layout-menu-toggle"></div>
-</div>
-<!-- / Layout wrapper -->
-
 <script type="text/javascript">
-    function checkPasswordMatch(confirmPassword){
-        if (confirmPassword.value != $("#password").val()){
-            confirmPassword.setCustomValidity("Password do not match!");
-        }else{
-            confirmPassword.setCustomValidity("");
+	moduleURL = "[[@{/}]]";
 
-        }
-    }
+	function checkPasswordMatch(confirmPassword) {
+		if (confirmPassword.value != $("#password").val()) {
+			confirmPassword.setCustomValidity("Passwords do not match!");
+		} else {
+			confirmPassword.setCustomValidity("");
+		}
+	}
+	
 </script>
-
-<script type="text/javascript" th:src="@{/js/common_form.js}"></script>
-
-<!-- Core JS-->
-<!-- build:js assets/vendor/js/core.js-->
-<script th:src="@{/assets/vendor/libs/jquery/jquery.js}"></script>
-<script th:src="@{/assets/vendor/libs/popper/popper.js}"></script>
-<script th:src="@{/assets/vendor/js/bootstrap.js}"></script>
-<script th:src="@{/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
-
-<script th:src="@{/assets/vendor/js/menu.js}"></script>
-<!-- endbuild -->
-
-<!-- Vendors JS -->
-<script th:src="@{/assets/vendor/libs/apex-charts/apexcharts.js}"></script>
-
-<!-- Main JS -->
-<script th:src="@{/assets/js/main.js}"></script>
-
-<!-- Page JS -->
-<script th:src="@{/assets/js/dashboards-analytics.js}"></script>
-
+<script th:src="@{/js/common_form.js}"></script>
 
 </body>
 </html>

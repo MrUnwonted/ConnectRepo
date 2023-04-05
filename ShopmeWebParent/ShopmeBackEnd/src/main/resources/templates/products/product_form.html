@@ -1,407 +1,112 @@
 <!DOCTYPE html>
-<html
-        lang="en"
-        class="light-style layout-menu-fixed"
-        dir="ltr"
-        data-theme="theme-default"
-        data-assets-path="../assets/"
-        data-template="vertical-menu-template-free"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
->
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <head th:replace="fragments  :: page_head(${pageTitle}, 'tag' )"/>
-
-  <link rel="stylesheet" href="https://www.jqueryscript.net/demo/Rich-Text-Editor-jQuery-RichText/richtext.min.css"/>
-  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<head th:replace="fragments :: page_head(${pageTitle}, 'tag')" />
+	<link rel="stylesheet" th:href="@{/richtext/richtext.min.css}" />
+	<script th:src="@{/richtext/jquery.richtext.min.js}"></script>
 </head>
-
-
 <body>
-
-<div class="layout-wrapper layout-content-navbar">
-  <div class="layout-container">
-
-
-    <aside th:replace="fragments :: page_sidebar">
-    </aside>
-
-    <div class="layout-page">
-
-      <!-- Navbar -->
-      <nav th:replace="fragments :: page_navbar">
-      </nav>
-
-      <div class="content-wrapper">
-
-        <!-- Content -->
-
-        <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Product/</span> [[${pageTitle}]]</h4>
-          <div class="row">
-            <div class="col-xl">
-              <div class="card mb-4">
-                <div class="card-header d-flex align-items-center justify-content-between">
-                  <h5 class="mb-0">Complete the From</h5>
-                  <small class="text-muted float-end">Product Details</small>
-                </div>
-                <div class="card-body">
-
-                  <form th:object="${product}"
-                        th:action="@{/products/save}"
-                        onsubmit="return checkUnique(this)"
-                        enctype="multipart/form-data"
-                        method="post">
-                    <input type="hidden" th:field="*{id}">
-                    <input th:if="${product.category != null}" type="hidden" id="categoryId" th:value="${product.category.id}">
-
-                    <div class="col-xl-12">
-                      <h6 class="text-muted">Product Details</h6>
-                      <div class="nav-align-top mb-4">
-                        <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
-                          <li class="nav-item">
-                            <button
-                                    type="button"
-                                    class="nav-link active"
-                                    role="tab"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#navs-pills-justified-overview"
-                                    aria-controls="navs-pills-justified-overview"
-                                    aria-selected="true"
-                            >Overview</button>
-                          </li>
-                          <li class="nav-item">
-                            <button
-                                    type="button"
-                                    class="nav-link"
-                                    role="tab"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#navs-pills-justified-description"
-                                    aria-controls="navs-pills-justified-description"
-                                    aria-selected="false"
-                            >Description
-                            </button>
-                          </li>
-                          <li class="nav-item">
-                            <button
-                                    type="button"
-                                    class="nav-link"
-                                    role="tab"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#navs-pills-justified-images"
-                                    aria-controls="navs-pills-justified-images"
-                                    aria-selected="false"
-                            >Images
-                            </button>
-                          </li>
-                          <li class="nav-item">
-                            <button
-                                    type="button"
-                                    class="nav-link"
-                                    role="tab"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#navs-pills-justified-details"
-                                    aria-controls="navs-pills-justified-details"
-                                    aria-selected="false"
-                            >Details
-                            </button>
-                          </li>
-                          <li class="nav-item">
-                            <button
-                                    type="button"
-                                    class="nav-link"
-                                    role="tab"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#navs-pills-justified-shipping"
-                                    aria-controls="navs-pills-justified-shipping"
-                                    aria-selected="false"
-                            >Shipping
-                            </button>
-                          </li>
-                        </ul>
-                        <div class="tab-content">
-                          <div class="tab-pane fade show active" id="navs-pills-justified-overview" role="tabpanel">
-                            <div th:replace="products/product_overview :: content"></div>
-
-                          </div>
-                          <div class="tab-pane fade" id="navs-pills-justified-description" role="tabpanel">
-
-                            <th:block th:if="${#authorization.expression('hasAuthority(''Admin'')') ||  #authorization.expression('hasAuthority(''Editor'')')}">
-                              <div th:replace="products/product_description :: content"></div>
-                            </th:block>
-
-                            <th:block th:if="${!#authorization.expression('hasAuthority(''Admin'')') && !#authorization.expression('hasAuthority(''Editor'')')}">
-                              <th:block th:if="${#authorization.expression('hasAuthority(''Salesperson'')')}">
-                                <div th:replace="products/product_description_readonly :: content"></div>
-                              </th:block>
-                            </th:block>
-
-                          </div>
-                          <div class="tab-pane fade" id="navs-pills-justified-images" role="tabpanel">
-
-                            <th:block th:if="${#authorization.expression('hasAuthority(''Admin'')') || #authorization.expression('hasAuthority(''Editor'')')}">
-                              <div th:replace="products/product_images :: content"></div>
-                            </th:block>
-
-                            <th:block th:if="${!#authorization.expression('hasAuthority(''Admin'')') && !#authorization.expression('hasAuthority(''Editor'')')}">
-                              <th:block th:if="${#authorization.expression('hasAuthority(''Salesperson'')')}">
-                                <div th:replace="products/product_images_readonly :: content"></div>
-                              </th:block>
-                            </th:block>
-
-                          </div>
-                          <div class="tab-pane fade" id="navs-pills-justified-details" role="tabpanel">
-
-                            <th:block th:if="${#authorization.expression('hasAuthority(''Admin'')') || #authorization.expression('hasAuthority(''Editor'')')}">
-                              <div th:replace="products/product_details :: content"></div>
-                              <div>
-                                <input type="button"
-                                       class="btn btn-outline-secondary"
-                                       onclick="addNextDetailSection()"
-                                       value="Add more Details">
-                              </div>
-                            </th:block>
-
-                            <th:block th:if="${!#authorization.expression('hasAuthority(''Admin'')') && !#authorization.expression('hasAuthority(''Editor'')')}">
-                              <th:block th:if="${#authorization.expression('hasAuthority(''Salesperson'')')}">
-                                <div th:replace="products/product_detail_readonly :: content"></div>
-                              </th:block>
-                            </th:block>
-
-                          </div>
-
-                          <div class="tab-pane fade " id="navs-pills-justified-shipping" role="tabpanel">
-
-                            <th:block th:if="${#authorization.expression('hasAuthority(''Admin'')') || #authorization.expression('hasAuthority(''Editor'')')}">
-                              <div th:replace="products/product_shipping :: content"></div>
-                            </th:block>
-
-                            <th:block th:if="${!#authorization.expression('hasAuthority(''Admin'')') && !#authorization.expression('hasAuthority(''Editor'')')}">
-                              <th:block th:if="${#authorization.expression('hasAuthority(''Salesperson'')')}">
-                                <div th:replace="products/product_shipping_readonly :: content"></div>
-                              </th:block>
-                            </th:block>
-
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-sm-10">
-                          <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-
-                  <!-- Modal -->
-                  <div th:replace="modal :: modal">
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <!-- Footer -->
-      <footer th:replace="fragments :: page_footer">
-      </footer>
-
-
-      <div class="content-backdrop fade"></div>
-    </div>
-
-  </div>
-
+<div class="container-fluid">
+	<div th:replace="navigation :: menu"></div>
+	<div>
+		<h2>Manage Products | [[${pageTitle}]]</h2>	
+	</div>
+			
+	<form th:action="@{/products/save}" method="post" onsubmit="return checkUnique(this)"
+		enctype="multipart/form-data"
+		th:object="${product}">
+		<input type="hidden" th:field="*{id}" />
+		<input th:if="${product.category != null}" type="hidden" 
+			id="categoryId" th:value="${product.category.id}" />
+	<div>
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+		  <li class="nav-item">
+		    <a class="nav-link active" data-toggle="tab" href="#overview" role="tab">Overview</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" data-toggle="tab" href="#description" role="tab">Description</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" data-toggle="tab" href="#images" role="tab">Images</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" data-toggle="tab" href="#details" role="tab">Details</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" data-toggle="tab" href="#shipping" role="tab">Shipping</a>
+		  </li>		  
+		</ul>
+		
+		<div class="tab-content">
+		  <div class="tab-pane active p-3" id="overview" role="tabpanel">
+		  	<div th:replace="products/product_overview :: content"></div>
+		  </div>
+		  <div class="tab-pane" id="description" role="tabpanel">
+			<th:block th:if="${isReadOnlyForSalesperson}">		  	
+		  			<div th:replace="products/product_description_read_only :: content"></div>
+		  	</th:block>
+		  	
+		  	<th:block th:unless="${isReadOnlyForSalesperson}">
+		  	<div th:replace="products/product_description :: content"></div>
+		  	</th:block>
+		  </div>
+		  <div class="tab-pane" id="images" role="tabpanel">
+		  	<th:block th:if="${isReadOnlyForSalesperson}">
+		  			<div th:replace="products/product_images_read_only :: content"></div>
+		  	</th:block>		  
+		  
+		  	<th:block th:unless="${isReadOnlyForSalesperson}">
+		  	<div th:replace="products/product_images :: content"></div>
+		  	</th:block>
+		  </div>
+		  <div class="tab-pane p-3" id="details" role="tabpanel">
+		  	<th:block th:if="${isReadOnlyForSalesperson}">
+		  			<div th:replace="products/product_details_read_only :: content"></div>
+		  	</th:block>		  	
+		  	
+			<th:block th:unless="${isReadOnlyForSalesperson}">
+		  	<div th:replace="products/product_details :: content"></div>
+		  	<div>
+		  		<input type="button" class="btn btn-secondary" value="Add More Detail"
+		  			onclick="addNextDetailSection()" />
+		  	</div>
+		  	</th:block>
+		  		
+		  </div>
+		  <div class="tab-pane p-3" id="shipping" role="tabpanel">
+		  	<th:block th:if="${isReadOnlyForSalesperson}">
+		  			<div th:replace="products/product_shipping_read_only :: content"></div>
+		  	</th:block>		  
+		  
+		  	<th:block th:unless="${isReadOnlyForSalesperson}">
+		  	<div th:replace="products/product_shipping :: content"></div>
+		  	</th:block>
+		  </div>
+		</div>	
+	</div>
+	<div class="text-center">
+		<input type="submit" value="Save" class="btn btn-primary m-3" />
+		<input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancel" />
+	</div>
+	</form>
+	
+	<div th:replace="modal_fragments :: modal_dialog"></div>
+	
+	<div th:replace="fragments :: footer"></div>
+	
 </div>
-
-<div class="layout-overlay layout-menu-toggle"></div>
-</div>
-
 <script type="text/javascript">
-  var extraImagesCount = 0;
-  brandModuleURL = "[[@{/brands}]]";
-  checkUniqueUrl = "[[@{/products/check_unique}]]";
-  defaultImageThumbnailSrc = "[[@{/images/default.png}]]";
-
-  MAX_FILE_SZIE = 502400; //500KB
-
-
-  dropDownBrands = $("#brand");
-  dropdownCategories = $("#categories");
-
-
-  $(document).ready(function (){
-
-    $("#shortDescription").richText();
-    $("#fullDescription").richText();
-
-    dropDownBrands.on('change', function (){
-      dropdownCategories.empty();
-      getCategories();
-
-    });
-
-    getCategoriesForNewForm();
-
-    $("input[name='extraImage']").each(function (index){
-      extraImagesCount++;
-      $(this).change(function (){
-        showExtraImageThumbnail(this,index);
-      });
-    });
-
-    $("a[name='linkRemoveExtraImage']").each(function (index){
-      $(this).click(function (){
-        removeExtraImage(index);
-      });
-    });
-
-  });
-
-  function getCategoriesForNewForm(){
-    catIdField = $("#categoryId");
-    editMode = false;
-
-
-    if (catIdField.length){
-      editMode = true;
-    }
-
-    if (!editMode )  return getCategories();
-  }
-
-  function showExtraImageThumbnail(fileInput,index){
-    var file = fileInput.files[0];
-
-    fileName = file.name;
-
-    imageNameHiddenField = $("#imageName" + index );
-    if (imageNameHiddenField.length){
-      imageNameHiddenField.val(fileName);
-    }
-
-    var reader = new FileReader();
-    reader.onload = function (e){
-      console.log(index);
-      $("#extraThumbnail" + index).attr("src",e.target.result);
-    };
-
-    reader.readAsDataURL(file)
-
-    if (index >= (extraImagesCount-1)){
-      addNextExtraImageSection(index + 1);
-      console.log(index);
-    }
-
-  }
-
-  function addNextExtraImageSection(index){
-    htmlExtraImage =  `
-    <div class="row mb-3" id="divExtraImage${index}">
-        <label class="col-sm-2 col-form-label"
-               >Extra Image #${index + 1}</label>
-        <div class="col-sm-10">
-            <div class="input-group input-group-merge">
-                <span class="input-group-text"><i class="bx bx-font"></i></span>
-                <input type="file"
-                       name="extraImage"
-                       class="form-control"
-                       onchange="showExtraImageThumbnail(this, ${index})"
-                       accept="image/png, image/jpeg"/>
-            </div>
-            <div id="extraImageHeader${index}" class="col mt-3">
-                <img src="${defaultImageThumbnailSrc}"
-                     alt="Extra Image #${index + 1} preview"
-                     class="img-fluid"
-                     width="250"
-                     height="140"
-                     id="extraThumbnail${index}">
-            </div>
-            <div class="form-text"><sup>*</sup>Optional.</div>
-        </div>
-    </div>
-    `;
-
-    htmlLinkRemove = `
-    <a class="bx bx-trash-alt text-dark float-right"
-    href="javascript:removeExtraImage(${index-1})"
-     title="Remove this image"></a>
-    `;
-
-
-    $("#divProductImages").append(htmlExtraImage);
-    $("#extraImageHeader" + (index-1) ).append(htmlLinkRemove);
-    extraImagesCount++;
-
-  }
-
-  function removeExtraImage(index){
-    $("#divExtraImage" + index).remove();
-  }
-
-  function getCategories(){
-
-    brandId = dropDownBrands.val();
-    url = brandModuleURL + "/" + brandId + "/categories";
-
-    $.get(url,function (responseJSON){
-      $.each(responseJSON, function (index,category){
-        $("<option>").val(category.id).text(category.name).appendTo(dropdownCategories);
-      })
-    }).fail(function (){
-      showErrorModal("Could not connect to the server");
-    });
-  }
-
-  function checkUnique(form){
-    productId = $("#id").val();
-    productName = $("#name").val();
-
-    csrfValue = $("input[name='_csrf']").val();
-
-
-
-    params = {id: productId, name: productName, _csrf: csrfValue};
-
-    $.post(checkUniqueUrl,params, function (response){
-      if (response == "OK"){
-        form.submit();
-      }else if(response == "Duplicate"){
-        showWarningModal("There is another product having same name "+ productName);
-      }else {
-        showErrorModal("Unknown response from server");
-      }
-    }).fail(function (){
-      showErrorModal("Could not connect to the server");
-    });
-
-    return false;
-  }
+	MAX_FILE_SIZE = 502400; // 500KB
+	
+	moduleURL = "[[@{/products}]]";
+	brandModuleURL = "[[@{/brands}]]";
+	defaultImageThumbnailSrc = "[[@{/images/image-thumbnail.png}]]";
+	checkUniqueUrl = "[[@{/products/check_unique}]]";
+	
 </script>
-
-<script type="text/javascript" th:src="@{/js/product_form.js}"></script>
-<script type="text/javascript" th:src="@{/js/common_form.js}"></script>
-<script type="text/javascript" th:src="@{/js/product_form_details.js}"></script>
-
-<script th:src="@{/assets/vendor/libs/jquery/jquery.js}"></script>
-<script th:src="@{/assets/vendor/libs/popper/popper.js}"></script>
-<script th:src="@{/assets/vendor/js/bootstrap.js}"></script>
-<script th:src="@{/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
-
-<script th:src="@{/assets/vendor/js/menu.js}"></script>
-<script th:src="@{/assets/vendor/libs/apex-charts/apexcharts.js}"></script>
-
-<script th:src="@{/assets/js/main.js}"></script>
-
-<script th:src="@{/assets/js/dashboards-analytics.js}"></script>
-
-<script type="text/javascript" src="https://www.jqueryscript.net/demo/Rich-Text-Editor-jQuery-RichText/jquery.richtext.js"></script>
-<script type="text/javascript" th:src="@{/js/richText/jquery.richtext.min.js}"></script>
-
-
-
+<script th:src="@{/js/common_form.js}"></script>
+<script th:src="@{/js/product_form_overview.js}"></script>
+<script th:src="@{/js/product_form_images.js}"></script>
+<script th:src="@{/js/product_form_details.js}"></script>
 </body>
 </html>

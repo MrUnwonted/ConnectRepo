@@ -1,303 +1,123 @@
 <!DOCTYPE html>
-<!-- beautify ignore:start -->
-<html
-        lang="en"
-        class="light-style layout-menu-fixed"
-        dir="ltr"
-        data-theme="theme-default"
-        data-assets-path="../assets/"
-        data-template="vertical-menu-template-free"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
->
-<head th:replace="fragments  :: page_head(${pageTitle}, 'none')">
-</head>
-
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head(${pageTitle}, 'none')" />
 <body>
-<!--&lt;!&ndash; Layout wrapper &ndash;&gt;-->
-<div class="layout-wrapper layout-content-navbar">
-    <div class="layout-container">
-        <!-- Menu -->
+<div class="container-fluid">
+	<div th:replace="navigation :: menu"></div>
+	<div>
+		<h2>Manage Users | [[${pageTitle}]]</h2>	
+	</div>
+	
+	<form th:action="@{/users/save}" method="post" style="max-width: 700px; margin: 0 auto"
+		enctype="multipart/form-data"
+		th:object="${user}" onsubmit="return checkEmailUnique(this);">
+		<input type="hidden" th:field="*{id}" />
+	<div class="border border-secondary rounded p-3">
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">E-mail:</label>
+			<div class="col-sm-8">
+				<input type="email" class="form-control" th:field="*{email}" required minlength="8" maxlength="128"  />
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">First Name:</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control" th:field="*{firstName}" required minlength="2" maxlength="45"  />
+			</div>
+		</div>		
+		
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">Last Name:</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control" th:field="*{lastName}" required minlength="2" maxlength="45"  />
+			</div>
+		</div>		
+		
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">Password:</label>
+			<div class="col-sm-8">
+				<input th:if="${user.id == null}" type="password" class="form-control" 
+					th:field="*{password}" required minlength="8" maxlength="20"  />
+				
+				<input th:if="${user.id != null}" type="password" class="form-control" 
+					th:field="*{password}" minlength="8" maxlength="20"  />				
+			</div>
+		</div>		
 
-        <aside th:replace="fragments :: page_sidebar">
-        </aside>
-        <!-- / Menu -->
-
-        <!-- Layout container -->
-        <div class="layout-page">
-            <!-- Navbar -->
-
-            <nav th:replace="fragments :: page_navbar">
-            </nav>
-
-            <!-- / Navbar -->
-
-<!--             Content wrapper-->
-            <div class="content-wrapper">
-                <!-- Content -->
-
-                <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">User/</span> [[${pageTitle}]]</h4>
-
-                    <!-- User Adding Form -->
-                    <div class="row">
-                        <div class="col-xxl">
-                            <div class="card mb-4">
-                                <div class="card-header d-flex align-items-center justify-content-between">
-                                    <h5 class="mb-0">Complete the From</h5>
-                                    <small class="text-muted float-end">User Details</small>
-                                </div>
-                                <div class="card-body">
-
-                                        <form th:object="${user}"
-                                              th:action="@{/users/save}"
-                                              method="post"
-                                              enctype="multipart/form-data"
-                                              onsubmit="return checkEmailUnique(this);" >
-                                            <input type="hidden" th:field="*{id}">
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label"
-                                                   for="email">Email</label>
-                                            <div class="col-sm-10">
-                                                <div class="input-group input-group-merge">
-                                                    <span class="input-group-text"><i class="bx bx-envelope"></i></span>
-                                                    <input type="email"
-                                                            id="email"
-                                                            class="form-control"
-                                                            placeholder="Your Email"
-                                                            aria-label="email"
-                                                            th:field="*{email}"
-                                                            required
-                                                            minlength="8"
-                                                            maxlength="128"
-                                                            aria-describedby="email"
-                                                    />
-                                                    <span id="basic-icon-default-email2" class="input-group-text">@example.com</span>
-                                                </div>
-                                                <div class="form-text">You can use letters, numbers & periods</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname2">Full
-                                                Name</label>
-                                            <div class="col-sm-10">
-
-                                                <div class="input-group">
-                              <span id="basic-icon-default-fullname2" class="input-group-text"
-                              ><i class="bx bx-user"></i
-                              ></span>
-                                                    <input type="text"
-                                                           aria-label="First name"
-                                                           placeholder="First Name"
-                                                           th:field="*{firstName}"
-                                                           required
-                                                           minlength="3"
-                                                           maxlength="45"
-                                                           class="form-control"/>
-                                                    <input type="text"
-                                                           aria-label="Last name"
-                                                           placeholder="Last Name"
-                                                           th:field="*{lastName}"
-                                                           required
-                                                           minlength="3"
-                                                           class="form-control"/>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
-                                        <div class="row mb-3 form-password-toggle">
-                                            <label class="col-sm-2 form-label"
-                                                   for="basic-default-password32">Password</label>
-                                            <div class="col-sm-10">
-                                                <div class="input-group input-group-merge">
-                                <span id="basic-icon-default-password" class="input-group-text"
-                                ><i class="bx bx-lock"></i
-                                ></span>
-                                                    <input
-                                                            th:if="${user.id == null}"
-                                                            type="password"
-                                                            th:field="*{password}"
-                                                            required
-                                                            minlength="8"
-                                                            maxlength="20"
-                                                            class="form-control"
-                                                            id="basic-default-password32"
-                                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                                            aria-describedby="basic-default-password"
-                                                    />
-                                                    <input
-                                                            th:if="${user.id != null}"
-                                                            type="password"
-                                                            th:field="*{password}"
-                                                            minlength="8"
-                                                            maxlength="20"
-                                                            class="form-control"
-                                                            id="basic-default-password32"
-                                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                                            aria-describedby="basic-default-password"
-                                                    />
-                                                    <span class="input-group-text cursor-pointer"
-                                                          id="basic-default-password"
-                                                    ><i class="bx bx-hide"></i
-                                                    ></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label" for="defaultCheck1">Roles</label>
-                                            <div class="col-sm-10">
-                                                <div class="col-md">
-                                                    <small class="text-light fw-semibold">Available roles</small>
-                                                    <th:block th:each="role : ${listRoles}">
-                                                        <div class="form-check mt-3">
-                                                            <input th:field="*{roles}"
-                                                                   th:text="${role.name}"
-                                                                   th:value="${role.id}"
-                                                                   class="form-check-input"
-                                                                   type="checkbox"
-                                                                   id="defaultCheck1" />
-                                                            <label class="form-check-label" for="defaultCheck1">roleName</label>
-                                                            - <small> [[${role.description}]]</small>
-                                                        </div>
-                                                    </th:block>
-
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label" for="defaultCheck1">Enabled?</label>
-                                            <div class="col-sm-10">
-                                                <div class="col-md">
-                                                    <small class="text-light fw-semibold">Is this user want to be enabled?</small>
-                                                    <div class="form-check mt-3">
-                                                        <input th:field="*{enabled}"
-                                                                class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                                                        <label class="form-check-label" for="defaultCheck1">Enable</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label" for="fileImage">Photos</label>
-                                            <div class="col-sm-8 form-row">
-                                                <div class="input-group input-group-merge col">
-                                                    <input type="hidden" th:field="*{photos}" />
-                                                    <span class="input-group-text"><i class="bx bx-user"></i></span>
-                                                    <input class="form-control" id="fileImage" name="image" type="file" accept="image/png, imaage/jpeg"/>
-                                                </div>
-                                                <div class="col mt-3">
-                                                    <img th:src="@{${user.photosImagePath}}" alt="Photo preview" class="img-fluid w-px-150 h-px-150" id="thumbnail">
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="row justify-content-end">
-                                            <div class="col-sm-10">
-                                                <button type="submit" class="btn btn-primary">Save</button>
-                                            </div>
-                                        </div>
-                                        </form>
-                                    <div th:replace="modal :: modal">
-                                    </div>
-                                    
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-<!--                / Content -->
-
-                <!-- Footer -->
-                <footer th:replace="fragments :: page_footer">
-                </footer>
-                <!-- / Footer -->
-
-                <div class="content-backdrop fade"></div>
-            </div>
-            <!-- Content wrapper -->
-        </div>
-        <!-- / Layout page -->
-    </div>
-
-    <!-- Overlay -->
-    <div class="layout-overlay layout-menu-toggle"></div>
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">Roles:</label>
+			<div class="col-sm-8">
+				<th:block th:each="role : ${listRoles}">
+				<input type="checkbox" th:field="*{roles}" 
+					th:text="${role.name}"
+					th:value="${role.id}"
+					class="m-2"
+				/>
+				- <small>[[${role.description}]]</small>
+				<br/>
+				</th:block>
+			</div>
+		</div>		
+		
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">Enabled:</label>
+			<div class="col-sm-8">
+				<input type="checkbox" th:field="*{enabled}" />
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">Photos:</label>
+			<div class="col-sm-8">
+				<input type="hidden" th:field="*{photos}" />
+				<input type="file" id="fileImage" name="image" accept="image/png, image/jpeg"
+					class="mb-2" />
+				<img id="thumbnail" alt="Photos preview" th:src="@{${user.photosImagePath}}"
+					class="img-fluid" />
+			</div>
+		</div>						
+				
+		<div class="text-center">
+			<input type="submit" value="Save" class="btn btn-primary m-3" />
+			<input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancel" />
+		</div>
+	</div>
+	</form>
+	
+	<div th:replace="modal_fragments :: modal_dialog"></div>
+	
+	<div th:replace="fragments :: footer"></div>
+	
 </div>
-<!-- / Layout wrapper -->
-
 <script type="text/javascript">
-    MAX_FILE_SZIE = 102400; //500KB
-
-    function checkEmailUnique(form){
-        url = "[[@{/users/check_email}]]";
-        userEmail = $("#email").val();
-        userId = $("#id").val();
-        csrfValue = $("input[name='_csrf']").val();
-        params = {id: userId, email: userEmail, _csrf: csrfValue};
-
-        console.log(userEmail+csrfValue);
-
-        $.post(url, params, function(response) {
-            if(response == "OK"){
-                form.submit();
-            }else if(response =="Duplicated"){
-                showWarningModal("There is another user having the email "+userEmail);
-            }else{
-                showErrorModal(" Unknown response from server");
-            }
-
-        }).fail(function(){
-            showErrorModal("Could not connect to server");
-        });
-
-        return false;
-    }
-
-    function showModalDialog(title,message){
-        $("#modalTitle").text(title);
-        $("#modalBody").text(message);
-        $("#modalDialog").modal('show');
-
-    }
-
-    function showErrorModal(message){
-        showModalDialog("Error", message);
-    }
-
-    function showWarningModal(message){
-        showModalDialog("Warning",message);
-    }
+	MAX_FILE_SIZE = 102400; // 100KB
+	
+	moduleURL = "[[@{/users}]]";
+	
+	function checkEmailUnique(form) {
+		url = "[[@{/users/check_email}]]";
+		userEmail = $("#email").val();
+		userId = $("#id").val();
+		csrfValue = $("input[name='_csrf']").val();
+		
+		params = {id: userId, email: userEmail, _csrf: csrfValue};
+		
+		$.post(url, params, function(response) {
+			if (response == "OK") {
+				form.submit();
+			} else if (response == "Duplicated") {
+				showWarningModal("There is another user having the email " + userEmail);
+			} else {
+				showErrorModal("Unknown response from server");
+			}
+		}).fail(function() {
+			showErrorModal("Could not connect to the server");
+		});
+		
+		return false;
+	}
 </script>
-
-<script type="text/javascript" th:src="@{/js/common_form.js}"></script>
-
-<!-- Core JS-->
-<!-- build:js assets/vendor/js/core.js-->
-<script th:src="@{/assets/vendor/libs/jquery/jquery.js}"></script>
-<script th:src="@{/assets/vendor/libs/popper/popper.js}"></script>
-<script th:src="@{/assets/vendor/js/bootstrap.js}"></script>
-<script th:src="@{/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
-
-<script th:src="@{/assets/vendor/js/menu.js}"></script>
-<!-- endbuild -->
-
-<!-- Vendors JS -->
-<script th:src="@{/assets/vendor/libs/apex-charts/apexcharts.js}"></script>
-
-<!-- Main JS -->
-<script th:src="@{/assets/js/main.js}"></script>
-
-<!-- Page JS -->
-<script th:src="@{/assets/js/dashboards-analytics.js}"></script>
-
-
+<script th:src="@{/js/common_form.js}"></script>
 </body>
 </html>

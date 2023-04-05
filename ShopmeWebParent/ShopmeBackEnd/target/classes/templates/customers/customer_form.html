@@ -1,349 +1,141 @@
 <!DOCTYPE html>
-<!-- beautify ignore:start -->
-<html
-        class="light-style layout-menu-fixed"
-        data-assets-path="../assets/"
-        data-template="vertical-menu-template-free"
-        data-theme="theme-default"
-        dir="ltr"
-        lang="en"
-        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
-        xmlns:th="http://www.thymeleaf.org"
->
-<head th:replace="fragments  :: page_head(${pageTitle}, 'none')">
-</head>
-
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head(${pageTitle}, 'none')" />
 <body>
-<!--&lt;!&ndash; Layout wrapper &ndash;&gt;-->
-<div class="layout-wrapper layout-content-navbar">
-    <div class="layout-container">
-        <!-- Menu -->
+<div class="container-fluid">
+	<div th:replace="navigation :: menu"></div>
+	
+	<div>
+		<h2>Manage Customers | [[${pageTitle}]]</h2>
+	</div>
+		
+	<form th:action="@{/customers/save}" th:object="${customer}" method="post"
+		style="max-width: 600px; margin:  0 auto;"
+		onsubmit="return checkEmailUnique(this);"
+		>
+		<input type="hidden" th:field="*{id}" />
+	<div class="border border-secondary rounded p-3">
+	  <div class="form-group row">
+	    <label for="firstName" class="col-sm-4 col-form-label">First Name:</label>
+	    <div class="col-sm-8">
+	      <input type="text" class="form-control" th:field="*{firstName}" required minlength="2" maxlength="45">
+	    </div>
+	  </div>
+	  <div class="form-group row">
+	    <label for="lastName" class="col-sm-4 col-form-label">Last Name:</label>
+	    <div class="col-sm-8">
+	      <input type="text" class="form-control" th:field="*{lastName}" required minlength="2" maxlength="45">
+	    </div>
+	  </div>	  
+	  
+	  <div class="form-group row">
+	    <label for="email" class="col-sm-4 col-form-label">E-mail:</label>
+	    <div class="col-sm-8">
+	      <input type="email" class="form-control" th:field="*{email}" required minlength="10" maxlength="45">
+	    </div>
+	  </div>
+	  
+	  <div class="form-group row">
+	    <label for="password" class="col-sm-4 col-form-label">Password:</label>
+	    <div class="col-sm-8">
+	      <input type="password" class="form-control" th:field="*{password}" minlength="6" maxlength="45" placeholder="Leave blank if you don't want to change password">
+	    </div>
+	  </div>
+	  
+	  <div class="form-group row">
+	    <label for="phoneNumber" class="col-sm-4 col-form-label">Phone Number:</label>
+	    <div class="col-sm-8">
+	      <input type="text" class="form-control" th:field="*{phoneNumber}" required minlength="9" maxlength="12">
+	    </div>
+	  </div>
+	  
+	  <div class="form-group row">
+	    <label for="addressLine1" class="col-sm-4 col-form-label">Address Line 1:</label>
+	    <div class="col-sm-8">
+	      <input type="text" class="form-control" th:field="*{addressLine1}" required minlength="9" maxlength="64">
+	    </div>
+	  </div>
+	  
+	  <div class="form-group row">
+	    <label for="addressLine2" class="col-sm-4 col-form-label">Address Line 2:</label>
+	    <div class="col-sm-8">
+	      <input type="text" class="form-control" th:field="*{addressLine2}" maxlength="64">
+	    </div>
+	  </div>
 
-        <aside th:replace="fragments :: page_sidebar">
-        </aside>
-        <!-- / Menu -->
-
-        <!-- Layout container -->
-        <div class="layout-page">
-            <!-- Navbar -->
-
-            <nav th:replace="fragments :: page_navbar">
-            </nav>
-
-            <!-- / Navbar -->
-
-            <!--             Content wrapper-->
-            <div class="content-wrapper">
-                <!-- Content -->
-
-                <div class="container-xxl flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Customers/</span> [[${pageTitle}]]
-                    </h4>
-
-                    <!-- Customer Adding Form -->
-                    <div class="row">
-                        <div class="col-xxl">
-                            <div class="card mb-4">
-                                <div class="card-header d-flex align-items-center justify-content-between">
-                                    <h5 class="mb-0">Edit the Form</h5>
-                                    <small class="text-muted float-end">Customer Details</small>
-                                </div>
-                                <div class="card-body">
-
-                                    <form method="post"
-                                          onsubmit="return checkEmailUnique(this);"
-                                          th:action="@{/customers/save}"
-                                          th:object="${customer}">
-                                        <input th:field="*{id}" type="hidden">
-
-
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label" for="basic-icon-default-fullname2">Full
-                                                Name</label>
-                                            <div class="col-sm-10">
-
-                                                <div class="input-group">
-                              <span class="input-group-text" id="basic-icon-default-fullname2"
-                              ><i class="bx bx-user-circle"></i
-                              ></span>
-                                                    <input aria-label="First name"
-                                                           class="form-control"
-                                                           maxlength="45"
-                                                           minlength="2"
-                                                           required
-                                                           th:field="*{firstName}"
-                                                           type="text"/>
-                                                    <input aria-label="Last name"
-                                                           class="form-control"
-                                                           maxlength="45"
-                                                           minlength="2"
-                                                           required
-                                                           th:field="*{lastName}"
-                                                           type="text"/>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 col-form-label"
-                                                   for="email">Email</label>
-                                            <div class="col-sm-10">
-                                                <div class="input-group input-group-merge">
-                                                    <span class="input-group-text"><i class="bx bx-envelope"></i></span>
-                                                    <input aria-describedby="email"
-                                                           aria-label="email"
-                                                           class="form-control"
-                                                           id="email"
-                                                           maxlength="45"
-                                                           minlength="10"
-                                                           required
-                                                           th:field="*{email}"
-                                                           type="email"
-                                                    />
-                                                    <span class="input-group-text" id="basic-icon-default-email2">@example.com</span>
-                                                </div>
-                                                <div class="form-text">You can use letters, numbers & periods</div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3 form-password-toggle">
-                                            <label class="col-sm-2 form-label"
-                                                   for="basic-default-password32">Password</label>
-                                            <div class="col-sm-10">
-                                                <div class="input-group input-group-merge">
-                                <span class="input-group-text" id="basic-icon-default-password"
-                                ><i class="bx bx-lock"></i
-                                ></span>
-                                                    <input
-                                                            aria-describedby="basic-default-password"
-                                                            class="form-control"
-                                                            id="basic-default-password32"
-                                                            maxlength="15"
-                                                            minlength="8"
-                                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                                            th:field="*{password}"
-                                                            type="password"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 form-label"
-                                            >Phone Number</label>
-                                            <div class="col-sm-10">
-                                                <div class="input-group input-group-merge">
-                                                    <input
-                                                            aria-describedby="basic-default-password"
-                                                            class="form-control"
-                                                            maxlength="20"
-                                                            minlength="8"
-                                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                                            required
-                                                            th:field="*{phoneNumber}"
-                                                            type="text"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 form-label"
-                                            >Address Line 1</label>
-                                            <div class="col-sm-10">
-                                                <div class="input-group input-group-merge">
-                                                    <input
-                                                            class="form-control"
-                                                            maxlength="64"
-                                                            minlength="3"
-                                                            required
-                                                            th:field="*{addressLine1}"
-                                                            type="text"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 form-label"
-                                            >Address Line 2</label>
-                                            <div class="col-sm-10">
-                                                <div class="input-group input-group-merge">
-                                                    <input
-                                                            class="form-control"
-                                                            maxlength="64"
-                                                            minlength="3"
-                                                            th:field="*{addressLine2}"
-                                                            type="text"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 form-label"
-                                            >City</label>
-                                            <div class="col-sm-10">
-                                                <div class="input-group input-group-merge">
-                                                    <input
-                                                            class="form-control"
-                                                            maxlength="64"
-                                                            minlength="3"
-                                                            required
-                                                            th:field="*{city}"
-                                                            type="text"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 form-label"
-                                            >Country</label>
-                                            <div class="col-sm-10">
-                                                <div class="input-group input-group-merge">
-                                                    <select class="form-control" id="reg-country" required
-                                                            th:field="*{country}">
-                                                        <th:block th:each="country : ${listCountries}">
-                                                            <option th:value="${country.id}">[[${country.name}]]
-                                                            </option>
-                                                        </th:block>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 form-label"
-                                            >State/Provinces</label>
-                                            <div class="col-sm-10">
-                                                <div class="input-group input-group-merge">
-                                                    <input
-                                                            class="form-control"
-                                                            maxlength="45"
-                                                            minlength="3"
-                                                            required
-                                                            th:field="*{state}"
-                                                            type="text"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label class="col-sm-2 form-label"
-                                            >Postal Code</label>
-                                            <div class="col-sm-10">
-                                                <div class="input-group input-group-merge">
-                                                    <input
-                                                            class="form-control"
-                                                            maxlength="10"
-                                                            minlength="2"
-                                                            required
-                                                            th:field="*{postalCode}"
-                                                            type="text"
-                                                    />
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="row justify-content-end">
-                                            <div class="col-sm-10">
-                                                <button class="btn btn-primary" type="submit">Save</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    <div th:replace="modal :: modal">
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--                / Content -->
-
-            <!-- Footer -->
-            <footer th:replace="fragments :: page_footer">
-            </footer>
-            <!-- / Footer -->
-
-            <div class="content-backdrop fade"></div>
-        </div>
-        <!-- Content wrapper -->
-    </div>
-    <!-- / Layout page -->
-</div>
-
-<!-- Overlay -->
-<div class="layout-overlay layout-menu-toggle"></div>
-</div>
-<!-- / Layout wrapper -->
-
+	  <div class="form-group row">
+	    <label for="city" class="col-sm-4 col-form-label">City:</label>
+	    <div class="col-sm-8">
+	      <input type="text" class="form-control" th:field="*{city}" required minlength="3" maxlength="64">
+	    </div>
+	  </div>
+	  			  
+	  <div class="form-group row">
+	    <label for="country" class="col-sm-4 col-form-label">Country:</label>
+	    <div class="col-sm-8">
+	      <select th:field="*{country}" class="form-control">
+	      	<option th:each="country : ${listCountries}" th:value="${country.id}">[[${country.name}]]</option>
+	      </select>
+	    </div>
+	  </div>
+	  
+	  <div class="form-group row">
+	    <label for="state" class="col-sm-4 col-form-label">State/Province:</label>
+	    <div class="col-sm-8">
+	    	<input type="text" class="form-control" th:field="*{state}" minlength="3" maxlength="64" list="listStates"> 
+	      <datalist id="listStates">
+	      	
+	      </datalist>
+	    </div>
+	  </div>
+	  
+	  <div class="form-group row">
+	    <label for="postalCode" class="col-sm-4 col-form-label">Postal Code:</label>
+	    <div class="col-sm-8">
+	      <input type="text" class="form-control" th:field="*{postalCode}" required minlength="3" maxlength="6">
+	    </div>
+	  </div>
+	  
+	  <div class="text-center">
+	  	<input type="submit" value="Save" class="btn btn-primary m-3" />
+	  	<input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancel" />
+	  </div>
+	</div>
+	</form>
+	
+	<div th:replace="modal_fragments :: modal_dialog"></div>
+	
+	<div th:replace="fragments :: footer"></div>
+</div>	
 <script type="text/javascript">
-    function checkEmailUnique(form) {
-        url = "[[@{/customers/check_email}]]";
-        CustomerEmail = $("#email").val();
-        CustomerId = $("#id").val();
-        csrfValue = $("input[name='_csrf']").val();
-        params = {id: CustomerId, email: CustomerEmail, _csrf: csrfValue};
-
-        console.log(CustomerEmail + csrfValue);
-
-        $.post(url, params, function (response) {
-            if (response == "OK") {
-                form.submit();
-            } else if (response == "Duplicated") {
-                showWarningModal("There is another Customer having the email " + CustomerEmail);
-            } else {
-                showErrorModal(" Unknown response from server");
-            }
-        }).fail(function () {
-            showErrorModal("Could not connect to server");
-        });
-
-        return false;
-    }
-
-    function showModalDialog(title, message) {
-        $("#modalTitle").text(title);
-        $("#modalBody").text(message);
-        $("#modalDialog").modal('show');
-
-    }
-
-    function showErrorModal(message) {
-        showModalDialog("Error", message);
-    }
-
-    function showWarningModal(message) {
-        showModalDialog("Warning", message);
-    }
+	contextPath = "[[@{/}]]";
+	moduleURL = "[[@{/customers}]]";	
+		
+	function checkEmailUnique(form) {
+		customerId = $("#id").val();
+		customerEmail = $("#email").val();
+		csrfValue = $("input[name='_csrf'").val();
+		
+		url = "[[@{/customers/check_email}]]";
+		params = {id : customerId, email: customerEmail, _csrf: csrfValue};
+		
+		$.post(url, params, function(response) {
+			if (response == "OK") {
+				form.submit();
+			} else if (response == "Duplicated") {
+				showWarningModal("There is another customer having the email " + customerEmail);
+			} else {
+				showErrorModal("Unknown response from server");
+			}			
+		}).fail(function() {
+			showErrorModal("Could not connect to the server");	
+		});
+		
+		return false;
+	}	
+	
 </script>
-
-<script th:src="@{/js/common_form.js}" type="text/javascript"></script>
-
-<!-- Core JS-->
-<!-- build:js assets/vendor/js/core.js-->
-<script th:src="@{/assets/vendor/libs/jquery/jquery.js}"></script>
-<script th:src="@{/assets/vendor/libs/popper/popper.js}"></script>
-<script th:src="@{/assets/vendor/js/bootstrap.js}"></script>
-<script th:src="@{/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
-
-<script th:src="@{/assets/vendor/js/menu.js}"></script>
-<!-- endbuild -->
-
-<!-- Vendors JS -->
-<script th:src="@{/assets/vendor/libs/apex-charts/apexcharts.js}"></script>
-
-<!-- Main JS -->
-<script th:src="@{/assets/js/main.js}"></script>
-
-<!-- Page JS -->
-<script th:src="@{/assets/js/dashboards-analytics.js}"></script>
-
-
+<script th:src="@{/js/common_form.js}"></script>
+<script th:src="@{/js/common_form_country_state.js}"></script>	
 </body>
 </html>

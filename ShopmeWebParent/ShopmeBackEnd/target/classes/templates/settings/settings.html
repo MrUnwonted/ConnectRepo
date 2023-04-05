@@ -1,270 +1,90 @@
 <!DOCTYPE html>
-<!-- beautify ignore:start -->
-<html
-        lang="en"
-        class="light-style layout-menu-fixed"
-        dir="ltr"
-        data-theme="theme-default"
-        data-assets-path="../assets/"
-        data-template="vertical-menu-template-free"
-        xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <head th:replace="fragments  :: page_head(${pageTitle}, 'tag' )"/>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.11/cropper.js"></script>
-
-  <link rel="stylesheet" href="https://www.jqueryscript.net/demo/Rich-Text-Editor-jQuery-RichText/richtext.min.css"/>
-  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script ></script>
+	<head th:replace="fragments :: page_head('Settings - Shopme Admin', 'tag')" />
+	<link rel="stylesheet" th:href="@{/richtext/richtext.min.css}" />
+	<script th:src="@{/richtext/jquery.richtext.min.js}"></script>
 </head>
-
-
 <body>
-<!--&lt;!&ndash; Layout wrapper &ndash;&gt;-->
-<div class="layout-wrapper layout-content-navbar">
-  <div class="layout-container">
-    <!-- Menu -->
+<div class="container-fluid">
+	<div th:replace="navigation :: menu"></div>
+	<div>
+		<h2>Site Settings</h2>	
+	</div>
+			
+	<div th:if="${message != null}" class="alert alert-success text-center">
+		[[${message}]]
+	</div>
+					
+	<div>
+		<ul class="nav nav-tabs" id="settingTab" role="tablist">
+		  <li class="nav-item">
+		    <a class="nav-link active" data-toggle="tab" href="#general" role="tab">General</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" data-toggle="tab" href="#countries" role="tab">Countries</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" data-toggle="tab" href="#states" role="tab">States</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" data-toggle="tab" href="#mailServer" role="tab">Mail Server</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" data-toggle="tab" href="#mailTemplates" role="tab">Mail Templates</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" data-toggle="tab" href="#payment" role="tab">Payment</a>
+		  </li>		  		  
+		</ul>
+		
+		<div class="tab-content">
+		  <div class="tab-pane active p-3" id="general" role="tabpanel">
+		  	<div th:replace="settings/general :: content"></div>
+		  </div>
+		  <div class="tab-pane p-3" id="countries" role="tabpanel">
+			<div th:replace="settings/countries :: content"></div>
+		  </div>
+		  <div class="tab-pane p-3" id="states" role="tabpanel">
+			<div th:replace="settings/states :: content"></div>
+		  </div>
+		  <div class="tab-pane p-3" id="mailServer" role="tabpanel">
+			<div th:replace="settings/mail_server :: content"></div>
+		  </div>
+		  <div class="tab-pane p-3" id="mailTemplates" role="tabpanel">
+			<div th:replace="settings/mail_templates/mail_templates :: content"></div>
+		  </div>
+		  <div class="tab-pane p-3" id="payment" role="tabpanel">
+			<div th:replace="settings/payment :: content"></div>
+		  </div>		  	
+		 </div>
+	</div>
 
-    <aside th:replace="fragments :: page_sidebar">
-    </aside>
-    <!-- / Menu -->
-
-    <!-- Layout container -->
-    <div class="layout-page">
-      <!-- Navbar -->
-
-      <nav th:replace="fragments :: page_navbar">
-      </nav>
-
-      <!-- / Navbar -->
-
-      <!--             Content wrapper-->
-      <div class="content-wrapper">
-        <!-- Content -->
-
-        <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Settings/</span> [[${pageTitle}]]</h4>
-          <div th:if="${message != null}" class="alert alert-success alert-dismissible" role="alert">
-            [[${message}]]
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-
-          <div class="row">
-            <div class="col-xxl">
-              <div class="card mb-4">
-                <div class="card-header d-flex align-items-center justify-content-between">
-                  <h5 class="mb-0">Manage settings of Site.</h5>
-                  <small class="text-muted float-end">Settings</small>
-                </div>
-                <div class="card-body">
-                  <div class="bs-toast hide toast fade bg-primary"
-                       style="position: absolute; top: 10px; right: 10px;"
-                       role="alert"
-                       aria-live="assertive"
-                       aria-atomic="true"
-                       data-delay="3000">
-                    <div class="toast-header">
-                      <i class="bx bx-bell me-2"></i>
-                      <div class="me-auto fw-semibold">CommerceFox</div>
-                      <small>now</small>
-                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div class="toast-body" id="toastMessage">
-
-                    </div>
-                  </div>
-
-                    <div class="col-xxl">
-                      <h6 class="text-muted">Tabs</h6>
-                      <div class="nav-align-top mb-4">
-                        <ul class="nav nav-pills mb-3 nav-fill" role="tablist">
-                          <li class="nav-item">
-                            <button
-                                    type="button"
-                                    class="nav-link active"
-                                    role="tab"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#navs-pills-justified-general"
-                                    aria-controls="navs-pills-justified-general"
-                                    aria-selected="true"
-                            >General</button>
-                          </li>
-                          <li class="nav-item">
-                            <button
-                                    type="button"
-                                    class="nav-link"
-                                    role="tab"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#navs-pills-justified-menus"
-                                    aria-controls="navs-pills-justified-menus"
-                                    aria-selected="false"
-                            >Menus
-                            </button>
-                          </li>
-                          <li class="nav-item">
-                            <button
-                                    type="button"
-                                    class="nav-link"
-                                    role="tab"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#navs-pills-justified-countries"
-                                    aria-controls="navs-pills-justified-countries"
-                                    aria-selected="false"
-                            >Countries
-                            </button>
-                          </li>
-                          <li class="nav-item">
-                            <button
-                                    type="button"
-                                    class="nav-link"
-                                    role="tab"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#navs-pills-justified-states"
-                                    aria-controls="navs-pills-justified-states"
-                                    aria-selected="false"
-                            >States
-                            </button>
-                          </li>
-                          <li class="nav-item">
-                            <button
-                                    type="button"
-                                    class="nav-link"
-                                    role="tab"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#navs-pills-justified-mail-server"
-                                    aria-controls="navs-pills-justified-mail-server"
-                                    aria-selected="false"
-                            >Mail Server
-                            </button>
-                          </li>
-                          <li class="nav-item">
-                            <button
-                                    type="button"
-                                    class="nav-link"
-                                    role="tab"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#navs-pills-justified-mail-templates"
-                                    aria-controls="navs-pills-justified-mail-templates"
-                                    aria-selected="false"
-                            >Mail Templates
-                            </button>
-                          </li>
-                          <li class="nav-item">
-                            <button
-                                    type="button"
-                                    class="nav-link"
-                                    role="tab"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#navs-pills-justified-payment"
-                                    aria-controls="navs-pills-justified-payment"
-                                    aria-selected="false"
-                            >Payment
-                            </button>
-                          </li>
-                        </ul>
-                        <div class="tab-content">
-                          <div class="tab-pane fade show active" id="navs-pills-justified-general" role="tabpanel">
-                            <div th:replace="settings/settings_general :: content"></div>
-                          </div>
-                          <div class="tab-pane fade" id="navs-pills-justified-menus" role="tabpanel">
-                            <div th:replace="settings/settings_menus :: content"></div>
-                          </div>
-                          <div class="tab-pane fade" id="navs-pills-justified-countries" role="tabpanel">
-                            <div th:replace="settings/settings_countries :: content"></div>
-                          </div>
-                          <div class="tab-pane fade" id="navs-pills-justified-states" role="tabpanel">
-                            <div th:replace="settings/settings_states :: content"></div>
-                          </div>
-                          <div class="tab-pane fade" id="navs-pills-justified-mail-server" role="tabpanel">
-                            <div th:replace="settings/settings_mail_server :: content"></div>
-                          </div>
-                          <div class="tab-pane fade" id="navs-pills-justified-mail-templates" role="tabpanel">
-                            <div th:replace="settings/mail_template :: content"></div>
-                          </div>
-                          <div class="tab-pane fade" id="navs-pills-justified-payment" role="tabpanel">
-                            <div th:replace="settings/payment :: content"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-      <footer th:replace="fragments :: page_footer">
-      </footer>
-
-      <div class="content-backdrop fade"></div>
-    </div>
-  </div>
+	<div class="toast justify-content-center d-flex" role="alert" aria-live="polite" aria-atomic="true" data-delay="3000">
+	  <div role="alert" aria-live="assertive" aria-atomic="true">
+	  	<div class="toast-body">
+	  		<span id="toastMessage"></span>
+	  	</div>
+	  </div>
+	</div>
+	
+	<div th:replace="fragments :: footer"></div>
+	
 </div>
-
-<div class="layout-overlay layout-menu-toggle"></div>
-</div>
-
-
-
-<script>
-  MAX_FILE_SZIE = 502400; //500KB
-  contextPath = "[[@{/}]]";
-
-  var csrfHeaderName = "[[${_csrf.headerName}]]";
-  var csrfValue = "[[${_csrf.token}]]";
-
-  $(document).ready(function (){
-    $('#customerVerificationContent').richText();
-    $('#orderConfirmationContent').richText({height : 400});
-  });
-
-  $(document).ready(function (){
-    $("#ad_image").change(function (){
-      if (!checkFileSize(this)){
-        return;
-      }else{
-        cropImage('ad_image-box','ad_image_crop-btn','ad_image','confirm-btn' ,'thumbnail1','img1',328/357);
-      }
-    });
-  });
-
-
+<script type="text/javascript">
+	MAX_FILE_SIZE = 102400; // 100KB
+	contextPath = "[[@{/}]]";
+	var csrfHeaderName = "[[${_csrf.headerName}]]";
+	var csrfValue = "[[${_csrf.token}]]";
+	
+	$(document).ready(function() {
+		$("#customerVerificationContent").richText();
+		$("#orderConfirmationContent").richText({height: 400});
+	});
+	
 </script>
-
-<script type="text/javascript" th:src="@{/js/cropper/cropping_image.js}"></script>
-<script type="text/javascript" th:src="@{/js/common_form.js}"></script>
-<script type="text/javascript" th:src="@{/js/countries_setting.js}"></script>
-<script type="text/javascript" th:src="@{/js/state_setting.js}"></script>
-
-
-  <!-- Core JS-->
-<!-- build:js assets/vendor/js/core.js-->
-<script th:src="@{/assets/vendor/libs/jquery/jquery.js}"></script>
-<script th:src="@{/assets/vendor/libs/popper/popper.js}"></script>
-<script th:src="@{/assets/vendor/js/bootstrap.js}"></script>
-<script th:src="@{/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
-
-<script th:src="@{/assets/vendor/js/menu.js}"></script>
-<!-- endbuild -->
-
-<!-- Vendors JS -->
-<script th:src="@{/assets/vendor/libs/apex-charts/apexcharts.js}"></script>
-
-<!-- Main JS -->
-<script th:src="@{/assets/js/main.js}"></script>
-
-<!-- Page JS -->
-<script th:src="@{/assets/js/dashboards-analytics.js}"></script>
-
-
-<script type="text/javascript" src="https://www.jqueryscript.net/demo/Rich-Text-Editor-jQuery-RichText/jquery.richtext.js"></script>
-<script type="text/javascript" th:src="@{/js/richText/jquery.richtext.min.js}"></script>
-
-
-
+<script th:src="@{/js/common_form.js}"></script>
+<script th:src="@{/js/countries_setting.js}"></script>
+<script th:src="@{/js/states_setting.js}"></script>
 </body>
 </html>

@@ -1,173 +1,86 @@
 <!DOCTYPE html>
-<!-- beautify ignore:start -->
-<html
-        lang="en"
-        class="light-style layout-menu-fixed"
-        dir="ltr"
-        data-theme="theme-default"
-        data-assets-path="../assets/"
-        data-template="vertical-menu-template-free"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
->
-<head th:replace="fragments  :: page_head('Dashboard | Brand Management','none')">
-</head>
-
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('Brands - Shopme Admin', 'none')" />
 <body>
-<!-- Layout wrapper -->
-<div class="layout-wrapper layout-content-navbar">
-  <div class="layout-container">
-    <!-- Menu -->
-    <aside th:replace="fragments :: page_sidebar">
-    </aside>
-    <!-- / Menu -->
+<div class="container-fluid">
+	<div th:replace="navigation :: menu"></div>
+	<div>
+		<h2>Manage Brands</h2>	
+		
+		<a th:href="@{/brands/new}" class="fas fa-folder-plus fa-2x icon-dark mr-2"></a>
+		<a th:href="@{/brands/export/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2"></a>
+	</div>
+		
+	<div th:replace="fragments :: search_form_and_message" />
+	
+	<div class="full-details">
+		<table class="table table-bordered table-striped table-hover table-responsive-xl">
+			<thead class="thead-dark">
+				<tr>
+					<th class="hideable-column">Brand ID</th>
+					<th>Logo</th>
+					<th th:replace="fragments :: column_link('name', 'Brand Name', 'none')" />
+					<th>Categories</th>
+					<th></th>
+				</tr>								
+			</thead>
+			<tbody>
+				<tr th:each="brand : ${listBrands}">
+					<td class="hideable-column">[[${brand.id}]]</td>
+					<td>
+						<img th:src="@{${brand.logoPath}}" style="width: 100px" class="img-fluid"/>
+					</td>
+					<td>[[${brand.name}]]</td>
+					<td>
+						<th:block th:each="cat : ${brand.categories}">
+						<span class="badge badge-secondary" th:text="${cat.name}"></span>
+						</th:block>
+					</td>
 
-    <!-- Layout container -->
-    <div class="layout-page">
-      <!-- Navbar -->
-
-      <nav th:replace="fragments :: page_navbar">
-      </nav>
-
-      <!-- / Navbar -->
-
-      <!-- Content wrapper -->
-      <div class="content-wrapper">
-        <!-- Content -->
-
-        <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">BRANDS /</span> All Brands</h4>
-          <div th:if="${message != null}" class="alert alert-success alert-dismissible" role="alert">
-            [[${message}]]
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-
-          <a th:href="@{/brands/new}"><button type="button" class="btn rounded-pill btn-primary mb-5">
-            <span class="tf-icons bx bx-user-plus"></span>&nbsp; Add
-          </button></a>
-
-          <div th:replace="fragments/search_filter :: search()"></div>
-
-          <div class="card">
-            <h5 class="card-header">Brands</h5>
-            <div class="table-responsive text-nowrap">
-              <table class="table table-hover ">
-                <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Logo</th>
-                  <th th:replace="fragments/column_link :: column_link('name', 'Brand Name','none')"></th>
-                  <th>Categories</th>
-                  <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody class="table-border-bottom-0">
-                <tr th:each="brands : ${listBrands}">
-                  <td><strong>[[${brands.id}]]</strong></td>
-                  <td>
-                    <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                      <li     data-bs-toggle="tooltip"
-                              data-popup="tooltip-custom"
-                              data-bs-placement="top"
-                              class="avatar avatar-xs pull-up"
-                              th:title="${brands.name}"
-                      >
-                        <span th:if="${brands.logo == null}" class="bx bx-user-circle" ></span>
-                        <img th:if="${brands.logo != null}" th:src="@{${brands.logoPath}}" alt="Avatar" class="rounded-circle" />
-                      </li>
-                    </ul>
-                  </td>
-                  <td>[[${brands.name}]]</td>
-
-                  <td>
-                  <th:block th:each="categories : ${brands.categories}">
-                    <span class="badge bg-label-primary me-1" th:text="${categories.name}"></span>
-                  </th:block>
-                  </td>
-                  <td>
-                    <div class="dropdown">
-                      <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                        <i class="bx bx-dots-vertical-rounded"></i>
-                      </button>
-                      <div class="dropdown-menu">
-                        <a class="dropdown-item" th:href="@{'/brands/edit/'+ ${brands.id}}" title="Edit this Brand"
-                        ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                        >
-                        <a class="dropdown-item delete-link"
-                           th:href="@{'/brands/delete/'+ ${brands.id}}"
-                           th:entityId="${brands.id}" title="Delete this Brand"
-                        ><i class="bx bx-trash me-1"></i> Delete</a
-                        >
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div th:replace="modal :: modal_confirm">
-          </div>
-
-          <hr class="my-3" />
-
-          <div th:replace="fragments/pagination :: pagination('brands', '/brands')"></div>
-
-          <hr class="my-5" />
-
-        </div>
-
-
-        <footer th:replace="fragments :: page_footer">
-        </footer>
-
-
-        <div class="content-backdrop fade"></div>
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="layout-overlay layout-menu-toggle"></div>
+					<td>
+						<div th:replace="fragments :: edit('brand', '/brands/edit/' + ${brand.id})" />
+						&nbsp; 
+						<div th:replace="fragments :: delete('brand', ${brand.id}, '/brands/delete/' + ${brand.id}, true)" />						
+					</td>					
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="less-details">
+		<div th:each="brand : ${listBrands}" class="row m-1">
+			<div class="col-6">
+				<img th:src="@{${brand.logoPath}}" style="width: 100px" class="img-fluid"/>			
+			</div>
+			<div class="col-6">
+				<div><b>[[${brand.name}]]</b></div>
+				<div class="mt-2">
+					<div th:replace="fragments :: edit('brand', '/brands/edit/' + ${brand.id})" />
+					&nbsp; 
+					<div th:replace="fragments :: delete('brand', ${brand.id}, '/brands/delete/' + ${brand.id}, true)" />
+				</div>
+			</div>
+			<div>&nbsp;</div>
+		</div>	
+	</div>	
+	
+	<div th:replace="fragments :: pagination('brands')"></div>
+	
+	<div th:replace="modal_fragments :: confirm_modal" />
+	
+	<div th:replace="fragments :: footer"></div>
+	
 </div>
-
-<script type="text/javascript" th:src="@{/js/common_list.js}"></script>
-
+<script th:src="@{/js/common_list.js}"></script>
 <script type="text/javascript">
-  $(document).ready(function (){
-    $(".delete-link").on("click", function (e){
-      e.preventDefault();
-      showDeleteConfirmationModal($(this), 'brand');
-    })
-  })
+	moduleURL = "[[@{/brands}]]";
 
-  function clearFilter(){
-    window.location = "[[@{/brands}]]"
-  }
+	$(document).ready(function() {
+		$(".link-delete").on("click", function(e) {
+			e.preventDefault();
+			showDeleteConfirmModal($(this), 'brand');
+		});
+	});
 </script>
-
-
-<!-- Core JS -->
-<!-- build:js assets/vendor/js/core.js -->
-<script th:src="@{/assets/vendor/libs/jquery/jquery.js}"></script>
-<script th:src="@{/assets/vendor/libs/popper/popper.js}"></script>
-<script th:src="@{/assets/vendor/js/bootstrap.js}"></script>
-<script th:src="@{/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
-
-<script th:src="@{/assets/vendor/js/menu.js}"></script>
-<!-- endbuild -->
-
-<!-- Vendors JS -->
-<script th:src="@{/assets/vendor/libs/apex-charts/apexcharts.js}"></script>
-
-<!-- Main JS -->
-<script th:src="@{/assets/js/main.js}"></script>
-
-<!-- Page JS -->
-<script th:src="@{/assets/js/dashboards-analytics.js}"></script>
-
-
 </body>
 </html>

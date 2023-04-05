@@ -1,241 +1,115 @@
 <!DOCTYPE html>
-<!-- beautify ignore:start -->
-<html
-        lang="en"
-        class="light-style layout-menu-fixed"
-        dir="ltr"
-        data-theme="theme-default"
-        data-assets-path="../assets/"
-        data-template="vertical-menu-template-free"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
->
-<head th:replace="fragments  :: page_head(${pageTitle},'none')">
-</head>
-
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head(${pageTitle}, 'none')" />
 <body>
-<!--&lt;!&ndash; Layout wrapper &ndash;&gt;-->
-<div class="layout-wrapper layout-content-navbar">
-  <div class="layout-container">
-    <!-- Menu -->
-
-    <aside th:replace="fragments :: page_sidebar">
-    </aside>
-    <!-- / Menu -->
-
-    <!-- Layout container -->
-    <div class="layout-page">
-      <!-- Navbar -->
-
-      <nav th:replace="fragments :: page_navbar">
-      </nav>
-
-      <!-- / Navbar -->
-
-      <!--             Content wrapper-->
-      <div class="content-wrapper">
-        <!-- Content -->
-
-        <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Category/</span> [[${pageTitle}]]</h4>
-
-          <!-- User Adding Form -->
-          <div class="row">
-            <div class="col-xxl">
-              <div class="card mb-4">
-                <div class="card-header d-flex align-items-center justify-content-between">
-                  <h5 class="mb-0">Complete the From</h5>
-                  <small class="text-muted float-end">Category Details</small>
-                </div>
-                <div class="card-body">
-
-                  <form th:object="${category}"
-                        th:action="@{/categories/save}"
-                        method="post"
-                        onsubmit="return checkUnique(this)"
-                        enctype="multipart/form-data">
-                    <input type="hidden" th:field="*{id}">
-                    <div class="row mb-3">
-                      <label class="col-sm-2 col-form-label"
-                             for="name">Name</label>
-                      <div class="col-sm-10">
-                        <div class="input-group input-group-merge">
-                          <span class="input-group-text"><i class="bx bx-font"></i></span>
-                          <input type="text"
-                                 id="name"
-                                 class="form-control"
-                                 placeholder="Category Name"
-                                 aria-label="name"
-                                 th:field="*{name}"
-                                 required
-                                 minlength="3"
-                                 maxlength="128"
-                                 aria-describedby="name"
-                          />
-                        </div>
-                        <div class="form-text"><sup>*</sup> Should have minimum 3 character</div>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label class="col-sm-2 col-form-label"
-                             for="name">Alias</label>
-                      <div class="col-sm-10">
-                        <div class="input-group input-group-merge">
-                          <span class="input-group-text"><i class="bx bx-at"></i></span>
-                          <input type="text"
-                                 id="alias"
-                                 class="form-control"
-                                 placeholder="Category Name"
-                                 aria-label="name"
-                                 th:field="*{alias}"
-                                 required
-                                 minlength="3"
-                                 maxlength="128"
-                                 aria-describedby="name"
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label class="col-sm-2 col-form-label"
-                             for="name">Parent Category</label>
-                      <div class="col-sm-10">
-                        <div class="input-group">
-                          <label class="input-group-text" for="inputGroupSelect01">Options</label>
-                          <select th:field="*{parent}" class="form-select" id="inputGroupSelect01">
-                            <option selected value="0">[No Parent]</option>
-
-                            <th:block th:each="category : ${listCategories}">
-                              <option th:value="${category.id}">[[${category.name}]]</option>
-                            </th:block>
-
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-
-
-
-                    <div class="row mb-3">
-                      <label class="col-sm-2 col-form-label" for="defaultCheck1">Enabled?</label>
-                      <div class="col-sm-10">
-                        <div class="col-md">
-                          <small class="text-light fw-semibold">Is this Category want to be enabled?</small>
-                          <div class="form-check mt-3">
-                            <input th:field="*{enabled}"
-                                   class="form-check-input" type="checkbox" value="" id="defaultCheck1" />
-                            <label class="form-check-label" for="defaultCheck1">Enable</label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label class="col-sm-2 col-form-label" for="fileImage">Image</label>
-                      <div class="col-sm-8 form-row">
-                        <div class="input-group input-group-merge col">
-                          <input type="hidden" th:field="*{image}" />
-                          <span class="input-group-text"><i class="bx bx-user"></i></span>
-                          <input class="form-control" id="fileImage" name="fileImage" type="file" accept="image/png, imaage/jpeg"/>
-                        </div>
-                        <div class="col mt-3">
-                          <img th:src="@{${category.imagePath}}" alt="Image preview" class="img-fluid w-px-150 h-px-150" id="thumbnail">
-                        </div>
-                      </div>
-                    </div>
-
-
-                    <div class="row justify-content-end">
-                      <div class="col-sm-10">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                      </div>
-                    </div>
-                  </form>
-                  <!-- Modal -->
-                  <div th:replace="modal :: modal">
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- / Content -->
-
-      <!-- Footer -->
-      <footer th:replace="fragments :: page_footer">
-      </footer>
-      <!-- / Footer -->
-
-      <div class="content-backdrop fade"></div>
-    </div>
-    <!-- Content wrapper -->
-  </div>
-  <!-- / Layout page -->
+<div class="container-fluid">
+	<div th:replace="navigation :: menu"></div>
+	<div>
+		<h2>Manage Categories | [[${pageTitle}]]</h2>	
+	</div>
+			
+	<form th:action="@{/categories/save}" method="post" style="max-width: 500px; margin: 0 auto"
+		enctype="multipart/form-data"
+		onsubmit="return checkUnique(this)"
+		th:object="${category}">
+		<input type="hidden" th:field="*{id}" />
+	<div class="border border-secondary rounded p-3">
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">Category Name:</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control" th:field="*{name}" required minlength="3" maxlength="128"  />
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">Alias:</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control" th:field="*{alias}" required minlength="3" maxlength="64"  />
+			</div>
+		</div>		
+		
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">Parent Category:</label>
+			<div class="col-sm-8">
+				<select class="form-control" th:field="*{parent}">
+					<option value="0">[No Parent]</option>
+					
+					<th:block th:each="cat : ${listCategories}">
+					<option th:value="${cat.id}">[[${cat.name}]]</option>
+					</th:block>
+					
+				</select>
+			</div>
+		</div>		
+		
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">Image:</label>
+			<div class="col-sm-8">
+				<input type="hidden" th:field="*{image}" />
+				<input type="file" id="fileImage" name="fileImage" accept="image/png, image/jpeg"
+					th:required="${category.imagePath == null}"
+					class="mb-2" />
+				
+				<div class="mt-2">
+					<img id="thumbnail" alt="Image preview" th:src="@{${category.imagePath}}"
+						class="img-fluid" />
+				</div>
+			</div>
+		</div>						
+				
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label">Enabled:</label>
+			<div class="col-sm-8">
+				<input type="checkbox" th:field="*{enabled}" />
+			</div>
+		</div>
+						
+		<div class="text-center">
+			<input type="submit" value="Save" class="btn btn-primary m-3" />
+			<input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancel" />
+		</div>
+	</div>
+	</form>
+	
+	<div th:replace="modal_fragments :: modal_dialog"></div>
+	
+	<div th:replace="fragments :: footer"></div>
+	
 </div>
-
-<!-- Overlay -->
-<div class="layout-overlay layout-menu-toggle"></div>
-</div>
-<!-- / Layout wrapper -->
-
 <script type="text/javascript">
-  MAX_FILE_SZIE = 102400; //500KB
-
-  function checkUnique(form){
-      catId = $("#id").val();
-      catName = $("#name").val();
-      catAlias = $("#alias").val();
-      csrfValue = $("input[name='_csrf']").val();
-      
-      url = "[[@{/categories/check_unique}]]";
-      
-      params={id: catId,name: catName,alias: catAlias,_csrf: csrfValue}
-      
-      $.post(url,params,function(response){
-		  if (response == "OK"){
-            console.log("Ok")
-            form.submit();
-          }else if (response == "DuplicateName"){
-            showWarningModal("There is another category having the name: "+catName);
-          }else if (response == "DuplicateAlias"){
-            showWarningModal("There is another category having the alias: "+catAlias);
-          }else{
-            showErrorModal("Unknown response from server");
-          }
-	  }).fail(function(){
-		 showErrorModal("Could not connect to Server");
-	  });
-      
-      return false;
-  }
-
+	MAX_FILE_SIZE = 102400; // 100KB
+	moduleURL = "[[@{/categories}]]";
+	
+	function checkUnique(form) {
+		catId = $("#id").val();
+		catName = $("#name").val();
+		catAlias = $("#alias").val();
+		
+		csrfValue = $("input[name='_csrf']").val();
+		
+		url = "[[@{/categories/check_unique}]]";
+		
+		params = {id: catId, name: catName, alias: catAlias, _csrf: csrfValue};
+		
+		$.post(url, params, function(response) {
+			if (response == "OK") {
+				form.submit();
+			} else if (response == "DuplicateName") {
+				showWarningModal("There is another category having same name " + catName);	
+			} else if (response == "DuplicateAlias") {
+				showWarningModal("There is another category having same alias " + catAlias);
+			} else {
+				showErrorModal("Unknown response from server");
+			}
+			
+		}).fail(function() {
+			showErrorModal("Could not connect to the server");
+		});
+		
+		return false;
+	}
+	
 </script>
-
-<script type="text/javascript" th:src="@{/js/common_form.js}"></script>
-
-<!-- Core JS-->
-<!-- build:js assets/vendor/js/core.js-->
-<script th:src="@{/assets/vendor/libs/jquery/jquery.js}"></script>
-<script th:src="@{/assets/vendor/libs/popper/popper.js}"></script>
-<script th:src="@{/assets/vendor/js/bootstrap.js}"></script>
-<script th:src="@{/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js}"></script>
-
-<script th:src="@{/assets/vendor/js/menu.js}"></script>
-<!-- endbuild -->
-
-<!-- Vendors JS -->
-<script th:src="@{/assets/vendor/libs/apex-charts/apexcharts.js}"></script>
-
-<!-- Main JS -->
-<script th:src="@{/assets/js/main.js}"></script>
-
-<!-- Page JS -->
-<script th:src="@{/assets/js/dashboards-analytics.js}"></script>
-
-
+<script th:src="@{/js/common_form.js}"></script>
 </body>
 </html>

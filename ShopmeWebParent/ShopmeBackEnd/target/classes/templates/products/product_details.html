@@ -1,85 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
+<html  xmlns:th="http://www.thymeleaf.org">
 <body>
 <div th:fragment="content" id="divProductDetails">
-  <th:block th:each="detail, status : ${product.details}">
-
-    <div class="row mb-3 form-inline flex-nowrap" th:id="'divDetail'+ ${status.index}">
-      <input type="hidden" name="detailIDs" th:value="${detail.id}">
-      <label class="col-sm-1 col-form-label"
-             for="detailNames">Name</label>
-      <div class="col-sm-4">
-        <div class="input-group input-group-merge">
-          <input type="text"
-                 id="detailNames"
-                 th:value="${detail.name}"
-                 class="form-control"
-                 placeholder="Name"
-                 maxlength="255"
-                 name="detailNames"
-          />
-        </div>
-      </div>
-      <label class="col-sm-1 col-form-label"
-             for="detailValues">Value</label>
-      <div class="col-sm-4">
-        <div class="input-group input-group-merge">
-          <span class="input-group-text"><i class="bx bx-font"></i></span>
-          <input type="text"
-                 name="detailValues"
-                 id="detailValues"
-                 th:value="${detail.value}"
-                 class="form-control"
-                 placeholder="Value"
-                 maxlength="255"
-          />
-
-        </div>
-      </div>
-      <a class="bx bx-trash-alt text-dark"
-         name="linkRemoveDetail"
-         href="javascript:removeDetailSectionById('${previousDivDetailId}')"
-         title="Remove this Field"></a>
-
-    </div>
-
-  </th:block>
-
-
-  <div class="row mb-3 form-inline flex-nowrap" th:id="'divDetail' + ${#lists.size(product.details)}">
-    <input type="hidden" name="detailIDs" value="0">
-    <label class="col-sm-1 col-form-label"
-           for="detailNames">Name</label>
-    <div class="col-sm-4">
-      <div class="input-group input-group-merge">
-        <input type="text"
-               id="detailNames"
-               class="form-control"
-               placeholder="Name"
-               maxlength="255"
-               name="detailNames"
-        />
-      </div>
-    </div>
-    <label class="col-sm-1 col-form-label"
-           for="detailValues">Value</label>
-    <div class="col-sm-4">
-      <div class="input-group input-group-merge">
-        <span class="input-group-text"><i class="bx bx-font"></i></span>
-        <input type="text"
-               name="detailValues"
-               id="detailValues"
-               class="form-control"
-               placeholder="Value"
-               maxlength="255"
-        />
-      </div>
-    </div>
-  </div>
-</div>
+	<th:block th:each="detail, status : ${product.details}">
+	<div class="form-inline" th:id="'divDetail' + ${status.index}">
+		<input type="hidden" name="detailIDs" th:value="${detail.id}" />
+		<label class="m-3">Name:</label>
+		<input type="text" class="form-control w-25" name="detailNames" maxlength="255"
+			th:value="${detail.name}" />
+		<label class="m-3">Value:</label>
+		<input type="text" class="form-control w-25" name="detailValues" maxlength="255"
+			th:value="${detail.value}" />
+		<a name="linkRemoveDetail" class="btn fas fa-times-circle fa-2x icon-dark"
+			title="Remove this detail"></a>			
+	</div>	
+	</th:block>
+	
+	<div class="form-inline" th:id="'divDetail' + ${#lists.size(product.details)}">
+		<input type="hidden" name="detailIDs" value="0" />
+		<label class="m-3">Name:</label>
+		<input type="text" class="form-control w-25" name="detailNames" maxlength="255" />
+		<label class="m-3">Value:</label>
+		<input type="text" class="form-control w-25" name="detailValues" maxlength="255" />
+	</div>	
+</div>		
 </body>
 </html>

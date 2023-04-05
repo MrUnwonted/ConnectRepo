@@ -1,32 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html  xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:fragment="content">
-    <div class="row mb-3">
-        <label>Short Description</label>
-                <textarea
-                       class="form-control"
-                       th:field="*{shortDescription}"
-                       required
-                       rows="5"
-                       id="shortDescription"
-                ></textarea>
-    </div>
-    <div class="row mb-3">
-        <label>Full Description</label>
-        <textarea
-                class="form-control"
-                th:field="*{fullDescription}"
-                required
-                rows="5"
-                id="fullDescription"
-        ></textarea>
-    </div>
-
-</div>
+<div th:fragment="content" th:remove="tag">
+	<div class="m-2">
+		<label>Short Description:</label>
+		<textarea class="form-control" th:field="*{shortDescription}" rows="5" required></textarea>
+	</div>
+	
+	<div class="m-2">
+		<label>Full Description:</label>
+		<textarea class="form-control" th:field="*{fullDescription}" rows="10" required></textarea>
+	</div>	
+</div>		
 </body>
 </html>

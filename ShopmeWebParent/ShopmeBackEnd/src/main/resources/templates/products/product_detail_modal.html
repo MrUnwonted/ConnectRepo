@@ -1,247 +1,113 @@
 <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel4">Product Details</h5>
-    <button
-            type="button"
-            class="btn-close"
-            data-bs-dismiss="modal"
-            aria-label="Close"
-    ></button>
+	<h4 class="modal-title">Product Details</h4>
+	<button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 
-<div class="modal-body">
-    <div class="col-xl-12">
-        <h6 class="text-muted">Product Details</h6>
-        <div class="nav-align-top mb-4">
-            <ul class="nav nav-tabs mb-3 nav-fill" role="tablist">
-                <li class="nav-item">
-                    <button
-                            type="button"
-                            class="nav-link active"
-                            role="tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#navs-pills-justified-overview"
-                            aria-controls="navs-pills-justified-overview"
-                            aria-selected="true"
-                    >Overview</button>
-                </li>
-                <li class="nav-item">
-                    <button
-                            type="button"
-                            class="nav-link"
-                            role="tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#navs-pills-justified-description"
-                            aria-controls="navs-pills-justified-description"
-                            aria-selected="false"
-                    >Description
-                    </button>
-                </li>
-                <li class="nav-item">
-                    <button
-                            type="button"
-                            class="nav-link"
-                            role="tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#navs-pills-justified-images"
-                            aria-controls="navs-pills-justified-images"
-                            aria-selected="false"
-                    >Images
-                    </button>
-                </li>
-                <li class="nav-item">
-                    <button
-                            type="button"
-                            class="nav-link"
-                            role="tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#navs-pills-justified-details"
-                            aria-controls="navs-pills-justified-details"
-                            aria-selected="false"
-                    >Details
-                    </button>
-                </li>
-                <li class="nav-item">
-                    <button
-                            type="button"
-                            class="nav-link"
-                            role="tab"
-                            data-bs-toggle="tab"
-                            data-bs-target="#navs-pills-justified-shipping"
-                            aria-controls="navs-pills-justified-shipping"
-                            aria-selected="false"
-                    >Shipping
-                    </button>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane fade show active" id="navs-pills-justified-overview" role="tabpanel">
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label"
-                               for="name">Product Name</label>
-                        <div class="col-sm-10">
-                            <div class="input-group input-group-merge">
-                                <input type="text"
-                                       id="name"
-                                       class="form-control"
-                                       aria-label="name"
-                                       disabled
-                                       th:value="${product.name}"
-                                       readonl
-                                       aria-describedby="name"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label"
-                               for="alias">Product Alias</label>
-                        <div class="col-sm-10">
-                            <div class="input-group input-group-merge">
-                                <input type="text"
-                                       id="alias"
-                                       class="form-control"
-                                       aria-label="name"
-                                       th:value="${product.alias}"
-                                       readonly
-                                       aria-describedby="alias"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label"
-                               for="brand">Brand</label>
-                        <div class="col-sm-10">
-                                <div class="col-sm-10">
-                                        <input type="text"
-                                               id="brand"
-                                               class="form-control"
-                                               aria-label="brand"
-                                               th:value="${product.brand.name}"
-                                               readonly
-                                               aria-describedby="brand"
-                                        />
-                                </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label"
-                               for="categories">Category</label>
-                        <div class="col-sm-10">
-                                <div class="col-sm-10">
-                                        <input type="text"
-                                               id="categories"
-                                               class="form-control"
-                                               aria-label="categories"
-                                               th:value="${product.category.name}"
-                                               readonly
-                                               aria-describedby="categories"
-                                        />
-                                </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="enabled">Enabled?</label>
-                        <div class="col-sm-10">
-                            <div class="col-md">
-                                <small class="text-light fw-semibold">Want to be enabled?</small>
-                                <div class="form-check mt-3">
-                                    <input th:checked="${product.enabled}"
-                                           class="form-check-input" type="checkbox" value="" id="enabled" onclick="return false;" />
-                                    <label class="form-check-label" for="enabled">Enable</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label" for="inStock">In Stock</label>
-                        <div class="col-sm-10">
-                            <div class="col-md">
-                                <div class="form-check mt-3">
-                                    <input th:checked="${product.inStock}"
-                                           class="form-check-input" type="checkbox" value="" id="inStock" onclick="return false;" />
-                                    <label class="form-check-label" for="inStock">In Stock</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label"
-                               for="cost">Cost</label>
-                        <div class="col-sm-10">
-                            <div class="input-group input-group-merge">
-                                <input type="text"
-                                       id="cost"
-                                       disabled
-                                       class="form-control"
-                                       aria-label="cost"
-                                       th:value="${product.cost}"
-                                       aria-describedby="cost"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label"
-                               for="price">Price</label>
-                        <div class="col-sm-10">
-                            <div class="input-group input-group-merge">
-                                <input type="text"
-                                       id="price"
-                                       disabled
-                                       class="form-control"
-                                       aria-label="cost"
-                                       th:value="${product.price}"
-                                       aria-describedby="price"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label"
-                               for="discountPercent">Discount Price</label>
-                        <div class="col-sm-10">
-                            <div class="input-group input-group-merge">
-                                <input type="text"
-                                       id="discountPercent"
-                                       class="form-control"
-                                       aria-label="cost"
-                                       disabled
-                                       th:value="${product.discountPercent}"
-                                       aria-describedby="discountPercent"
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">Last Updated</label>
-                        <div class="col-sm-10">
-                            <div class="input-group input-group-merge">
-                               <span th:text="${#dates.format(product.updatedTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="navs-pills-justified-description" role="tabpanel">
-                    <div th:replace="product/product_description_readonly :: content"></div>
-                </div>
-                <div class="tab-pane fade" id="navs-pills-justified-images" role="tabpanel">
-                    <div th:replace="product/product_images_readonly :: content"></div>
-                </div>
-                <div class="tab-pane fade" id="navs-pills-justified-details" role="tabpanel">
-                    <div th:replace="product/product_detail_readonly :: content"></div>
-                </div>
-                <div class="tab-pane fade " id="navs-pills-justified-shipping" role="tabpanel">
-                    <div th:replace="product/product_shipping_readonly :: content"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div>
+	<ul class="nav nav-tabs" id="myTab" role="tablist">
+	  <li class="nav-item">
+	    <a class="nav-link active" data-toggle="tab" href="#overview" role="tab">Overview</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" data-toggle="tab" href="#description" role="tab">Description</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" data-toggle="tab" href="#images" role="tab">Images</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" data-toggle="tab" href="#details" role="tab">Details</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" data-toggle="tab" href="#shipping" role="tab">Shipping</a>
+	  </li>		  
+	</ul>
+	
+	<div class="tab-content">
+	  <div class="tab-pane active p-3" id="overview" role="tabpanel">
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label">Product Name:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" th:value="${product.name}" readonly />
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label">Alias:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" th:value="${product.alias}" readonly />
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label">Brand:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" th:value="${product.brand.name}" readonly />
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label">Category:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" th:value="${product.category.name}" readonly />
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label">Enabled:</label>
+			<div class="col-sm-10">
+				<input type="checkbox" th:checked="${product.enabled}" onclick="return false;" />
+			</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label">In-Stock:</label>
+			<div class="col-sm-10">
+				<input type="checkbox" th:checked="${product.inStock}" onclick="return false;" />
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label">Cost:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" th:value="${product.cost}" readonly />
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label">Price:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" th:value="${product.price}" readonly />
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label">Discount:</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" th:value="${product.discountPercent}" readonly />
+			</div>
+		</div>
+		
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label">Updated Time:</label>
+			<div class="col-sm-10">
+				<span th:text="${#dates.format(product.updatedTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+			</div>
+		</div>			  	
+	  </div>
+	  <div class="tab-pane" id="description" role="tabpanel">
+		<div th:replace="products/product_description_read_only :: content"></div>	  
+	  </div>
+	  <div class="tab-pane" id="images" role="tabpanel">
+		<div th:replace="products/product_images_read_only :: content"></div>
+	  </div>
+	  <div class="tab-pane p-3" id="details" role="tabpanel">
+		<div th:replace="products/product_details_read_only :: content"></div>
+	  </div>
+	  <div class="tab-pane p-3" id="shipping" role="tabpanel">
+		<div th:replace="products/product_shipping_read_only :: content"></div>
+	  </div>
+	</div>
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-        Close
-    </button>
-    <a type="button" class="btn btn-primary" th:href="@{'/products/edit/' + ${product.id}}">Edit</a>
+	<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 </div>
