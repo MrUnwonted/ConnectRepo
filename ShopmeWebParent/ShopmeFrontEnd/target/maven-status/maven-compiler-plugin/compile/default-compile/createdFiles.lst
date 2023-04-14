@@ -3,6 +3,7 @@ com\shopme\setting\StateRepository.class
 com\shopme\shipping\ShippingRateRepository.class
 com\shopme\ShopmeFrontEndApplication.class
 com\shopme\category\CategoryRepository.class
+com\shopme\order\OrderRestController.class
 com\shopme\setting\EmailSettingBag.class
 com\shopme\MainController.class
 com\shopme\customer\ForgotPasswordController.class
@@ -33,12 +34,15 @@ com\shopme\shipping\ShippingRateService.class
 com\shopme\shoppingcart\ShoppingCartException.class
 com\shopme\security\CustomerUserDetailsService.class
 com\shopme\product\ProductController.class
+com\shopme\order\OrderReturnResponse.class
 com\shopme\product\ProductService.class
 com\shopme\customer\CustomerController.class
 com\shopme\address\AddressController.class
 com\shopme\checkout\CheckoutInfo.class
+com\shopme\order\OrderReturnRequest.class
 com\shopme\checkout\paypal\PayPalApiException.class
 com\shopme\setting\PaymentSettingBag.class
+com\shopme\order\OrderController.class
 com\shopme\shoppingcart\ShoppingCartRestController.class
 com\shopme\customer\CustomerRestController.class
 com\shopme\MvcConfig.class
