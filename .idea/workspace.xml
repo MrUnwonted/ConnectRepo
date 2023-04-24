@@ -6,10 +6,22 @@
   <component name="ChangeListManager">
     <list default="true" id="8c69e2d8-749b-4bb3-a83f-45e6bdad5f59" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/src/main/resources/templates/categories/categories.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/src/main/resources/templates/categories/categories.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/src/main/resources/templates/products/product_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/src/main/resources/templates/products/product_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/target/classes/templates/categories/categories.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/target/classes/templates/categories/categories.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/target/classes/templates/products/product_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/target/classes/templates/products/product_form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/java/com/shopme/product/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/java/com/shopme/product/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/java/com/shopme/product/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/java/com/shopme/product/ProductRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/java/com/shopme/product/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/java/com/shopme/product/ProductService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/resources/templates/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/resources/templates/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/resources/templates/navigation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/resources/templates/product/product_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/resources/templates/product/product_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/target/classes/com/shopme/product/ProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/target/classes/com/shopme/product/ProductController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/target/classes/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/target/classes/templates/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/target/classes/templates/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/target/classes/templates/navigation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/target/classes/templates/product/product_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/target/classes/templates/product/product_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/site-logo/ShopmeAdminSmall.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/site-logo/login.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,18 +46,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Ecommerce/Test/shopme/ShopmeWebParent/ShopmeBackEnd&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "D:/Ecommerce/Test/shopme/ShopmeWebParent/ShopmeFrontEnd/src/main/resources/static",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
-  <component name="RunManager" selected="Application.ShopmeFrontEndApplication">
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Ecommerce\Test\shopme\ShopmeWebParent\ShopmeFrontEnd\src\main\resources\static" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ShopmeBackEndApplication">
     <configuration name="ShopmeBackEndApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.shopme.admin.ShopmeBackEndApplication" />
       <module name="ShopmeBackEnd" />
