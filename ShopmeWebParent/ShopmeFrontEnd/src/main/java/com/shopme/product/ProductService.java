@@ -31,10 +31,10 @@ public class ProductService {
 		
 		return product;
 	}
-
+	
 	public Page<Product> search(String keyword, int pageNum) {
 		Pageable pageable = PageRequest.of(pageNum - 1, SEARCH_RESULTS_PER_PAGE);
 		return repo.search(keyword, pageable);
-
+		
 	}
 }

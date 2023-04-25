@@ -76,7 +76,7 @@ public class ProductController {
 			return "error/404";
 		}
 	}
-
+	
 	@GetMapping("/search")
 	public String searchFirstPage(String keyword, Model model) {
 		return searchByPage(keyword, 1, model);

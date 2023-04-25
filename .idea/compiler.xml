@@ -7,18 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ShopmeCommon" />
-        <module name="ShopmeFrontEnd" />
         <module name="ShopmeBackEnd" />
+        <module name="ShopmeFrontEnd" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="shopme" target="1.5" />
-      <module name="ShopmeBackEnd" target="15" />
-      <module name="ShopmeCommon" target="15" />
-      <module name="ShopmeFrontEnd" target="15" />
-      <module name="ShopmeProject" target="1.5" />
-      <module name="ShopmeWebParent" target="15" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

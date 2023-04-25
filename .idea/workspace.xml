@@ -4,24 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8c69e2d8-749b-4bb3-a83f-45e6bdad5f59" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/src/main/resources/templates/categories/categories.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/src/main/resources/templates/categories/categories.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/src/main/resources/templates/products/product_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/src/main/resources/templates/products/product_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/target/classes/templates/categories/categories.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/target/classes/templates/categories/categories.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/target/classes/templates/products/product_form.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/target/classes/templates/products/product_form.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/java/com/shopme/product/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/java/com/shopme/product/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/java/com/shopme/product/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/java/com/shopme/product/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/java/com/shopme/product/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/java/com/shopme/product/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/resources/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/resources/templates/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/resources/templates/navigation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/resources/templates/product/product_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/resources/templates/product/product_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/target/classes/com/shopme/product/ProductController.class" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/target/classes/com/shopme/product/ProductController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/target/classes/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/target/classes/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/target/classes/templates/navigation.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/target/classes/templates/navigation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/target/classes/templates/product/product_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/target/classes/templates/product/product_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/site-logo/ShopmeAdminSmall.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/site-logo/login.png" beforeDir="false" />
+    <list default="true" id="d8b0ef9f-76d3-43be-b73d-b7589b66c40c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/ShopmeWebParent/ShopmeFrontEnd/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,43 +25,33 @@
         <option name="useMavenConfig" value="true" />
       </MavenGeneralSettings>
     </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
   </component>
-  <component name="ProjectId" id="2NuwNcwlIyHq5Ajgtg9NiCNgbVF" />
+  <component name="ProjectId" id="2O8l8NDdyjvtrDsyUYy9fOYxJmY" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "D:/Ecommerce/Test/shopme/ShopmeWebParent/ShopmeFrontEnd/src/main/resources/static",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "last_opened_file_path": "D:/Ecommerce/Test/shopme"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Ecommerce\Test\shopme\ShopmeWebParent\ShopmeFrontEnd\src\main\resources\static" />
-    </key>
-  </component>
   <component name="RunManager" selected="Application.ShopmeBackEndApplication">
     <configuration name="ShopmeBackEndApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.shopme.admin.ShopmeBackEndApplication" />
       <module name="ShopmeBackEnd" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.shopme.admin.*" />
           <option name="ENABLED" value="true" />
         </pattern>
-      </extension>
-      <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
-        <option name="credential" />
-        <option name="region" />
-        <option name="useCurrentConnection" value="false" />
       </extension>
       <method v="2">
         <option name="Make" enabled="true" />
@@ -85,41 +60,31 @@
     <configuration name="ShopmeFrontEndApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.shopme.ShopmeFrontEndApplication" />
       <module name="ShopmeFrontEnd" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ShopmeWebParent/ShopmeBackEnd" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.shopme.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
-        <option name="credential" />
-        <option name="region" />
-        <option name="useCurrentConnection" value="false" />
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <list>
-      <item itemvalue="Application.ShopmeBackEndApplication" />
-      <item itemvalue="Application.ShopmeFrontEndApplication" />
-    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ShopmeFrontEndApplication" />
         <item itemvalue="Application.ShopmeBackEndApplication" />
+        <item itemvalue="Application.ShopmeFrontEndApplication" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="8c69e2d8-749b-4bb3-a83f-45e6bdad5f59" name="Changes" comment="" />
-      <created>1680527236076</created>
+      <changelist id="d8b0ef9f-76d3-43be-b73d-b7589b66c40c" name="Changes" comment="" />
+      <created>1680949930247</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1680527236076</updated>
+      <updated>1680949930247</updated>
     </task>
     <servers />
   </component>

@@ -7,6 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.shopme.common.Constants;
 import com.shopme.common.entity.IdBasedEntity;
 
 @Entity
@@ -53,7 +54,7 @@ public class ProductImage extends IdBasedEntity {
 	
 	@Transient
 	public String getImagePath() {
-		return "/product-images/" + product.getId() + "/extras/" + this.name;
+		return Constants.S3_BASE_URI + "/product-images/" + product.getId() + "/extras/" + this.name;
 	}
 	
 }
