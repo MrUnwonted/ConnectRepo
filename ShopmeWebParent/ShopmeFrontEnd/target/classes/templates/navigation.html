@@ -5,7 +5,7 @@
 <div th:fragment="header_menu">
 	<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
 		<a class="navbar-brand" th:href="@{/}">
-			<img th:src="@{${SITE_LOGO}}" />
+			<img th:src="@{${S3_BASE_URI + SITE_LOGO}}" style="width: 150px;"/>
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar, #searchNavbar">
 			<span class="navbar-toggler-icon"></span>
@@ -21,12 +21,17 @@
 				<li class="nav-item">
 					<a class="nav-link" href="">Shipping &amp; Delivery</a>
 				</li>
+				
+				<th:block sec:authorize="!isAuthenticated()">
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/login}">Login</a>
 				</li>
+				
 				<li class="nav-item">
 					<a class="nav-link" th:href="@{/register}">Register</a>
 				</li>
+				</th:block>
+				
 				<li class="nav-item">
 					<a class="nav-link" href="">Contact</a>
 				</li>				
@@ -49,7 +54,7 @@
 			<div class="collapse navbar-collapse" id="searchNavbar">
 				<form class="form-inline" th:action="@{/search}" method="get">
 					<input type="search" name="keyword" class="form-control mr-sm-2"
-						th:value="${keyword}" 
+						th:value="${searchKeyword}"
 						placeholder="keyword" required />
 					<input type="submit" value="Search" class="btn btn-outline-success" />
 				</form>
@@ -73,7 +78,7 @@
 					</li>
 																				
 					<li class="nav-item">
-						<a class="nav-link" href="">Orders</a>
+						<a class="nav-link" th:href="@{/orders}">Orders</a>
 					</li>
 					
 					<li class="nav-item">
