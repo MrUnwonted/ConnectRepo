@@ -11,8 +11,5 @@
   	<module>ShopmeCommon</module>
   	<module>ShopmeWebParent</module>
   </modules>
-  
-  <parent>
-	  
-  
+
 </project>
