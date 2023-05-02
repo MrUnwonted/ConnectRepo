@@ -10,6 +10,25 @@
 	</div>
 	
 	<div class="row">
+		<div class="col" th:each="product, iterationStatus : ${listProducts}" th:if="${iterationStatus.index} &lt; 4">
+			<tr th:each="product,iterationStatus : ${listProducts}" th:if="${iterationStatus.index} &lt; 4">
+				<td>
+					<img th:src="@{${product.mainImagePath}}" style="width: 120px" class="img-fluid" />
+				</td>
+				<td>
+					<a class="link-detail"
+						th:href="@{'/products/detail/' + ${product.id}}"
+						th:title="${product.name}"
+						>[[${product.shortName}]]</a>					
+					
+				</td>
+			</tr>
+		
+			
+		</div>
+	</div>
+
+	<div class="row">
 		<div class="col" th:each="cat : ${listCategories}">
 			<div><img th:src="@{${cat.imagePath}}" width="80" /></div>
 			<div>

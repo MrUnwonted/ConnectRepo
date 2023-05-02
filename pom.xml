@@ -12,4 +12,7 @@
   	<module>ShopmeWebParent</module>
   </modules>
   
+  <parent>
+	  
+  
 </project>
