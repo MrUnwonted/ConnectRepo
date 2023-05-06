@@ -4,8 +4,8 @@ server:
   #   context-path: /Shopme
 spring:
   datasource:
-    password: Arjun@333
-    url: jdbc:mysql:/connecte.cqmi2rkawqln.ap-south-1.rds.amazonaws.com/connecte
+    password: 
+    url: jdbc:mysql://connecte.cqmi2rkawqln.ap-south-1.rds.amazonaws.com/connecte
     username: root
     hikari:
       minimum-idle: 1
