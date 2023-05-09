@@ -33,6 +33,7 @@ public class Constants {
 		String pattern = "https://%s.s3.%s.amazonaws.com";
 		S3_BASE_URI = bucketName == null ? "" : String.format(pattern, bucketName, region);;
 		System.out.println("Base URI is: " + S3_BASE_URI);
+		System.out.println("Hi");
 	}
 
 }
