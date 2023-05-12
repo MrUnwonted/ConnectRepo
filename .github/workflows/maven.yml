@@ -32,7 +32,7 @@ jobs:
     - name: Terminate Port 8080
       run: sudo kill -9 $(sudo lsof -t -i:8080) &
     - name: Terminate Port 80
-      run: sudo kill -9 $(sudo lsof -t -i:80) &
+      run: sudo kill -9 $(sudo lsof -t -i:8081) &
     - name: Execute Jar Backend
       run: sudo -E java -jar /home/ubuntu/actions-runner/_work/ConnectRepo/ConnectRepo/ShopmeWebParent/ShopmeBackEnd/target/ShopmeBackEnd-0.0.1-SNAPSHOT.jar &
     - name: Execute Jar FrontEnd
