@@ -1,2 +1,2 @@
-# shopme
-Referential Project for Shopme eCommerce Application
+# EConnect
+An Ecommerce App made in Springboot
